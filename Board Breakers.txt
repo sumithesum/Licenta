@@ -1,0 +1,10 @@
+Board Breakers
+King’s Gambit
+Beyond Checkmate
+Is this even chess?
+
+Un joc fun care sa il joci cu prieteni.
+Un joc competitive.
+Un joc non-repetitive.
+
+Aplicația le permite utilizatorilor să joace împreună un joc special de șah. În timpul jocului, aceștia pot accesa o funcționalitate unică: la fiecare capturare de piesă, jocul declanșează un minigame interactiv menit să decidă deznodământul capturării. Fiecare duel din minigame este influențat de valoarea pieselor implicate în capturare, adăugând astfel un strat suplimentar de strategie. Această combinație de șah și mini-provocări dinamice aduce un plus de intensitate, transformând fiecare mutare într-o confruntare captivantă.
