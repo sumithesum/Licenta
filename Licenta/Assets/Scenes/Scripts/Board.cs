@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -15,7 +16,7 @@ public class BoardCreate : MonoBehaviour
     private GameObject whitePrefab;
     private GameObject blackPrefab;
 
-     Pices [] board = new Pices[64];
+    public GameObject [] board = new GameObject[64];
 
     private bool createEmptyMap()
     {
@@ -25,12 +26,12 @@ public class BoardCreate : MonoBehaviour
             if (i % 8 == 0)
                 alb = alb == true ? false : true;
             if (!alb) {
-                Instantiate(blackPrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
+                board[i] = Instantiate(blackPrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
                 alb = true;
             }
             else
             {
-                Instantiate(whitePrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
+                board[i] = Instantiate(whitePrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
                 alb = false;
             }
 
@@ -41,204 +42,111 @@ public class BoardCreate : MonoBehaviour
     void printBoard()
     {
         string final = "";
-        for (int i = 7; i > -1; i--) {
+        for (int i = 7; i > -1; i--)
+        {
             string line = "";
             for (int j = 0; j < 8; j++)
-                line += board[i * 8 + j].type.ToString() + "    ";
-             final += line + "\n" + "\n"; 
+            {
+                line += board[i * 8 + j].GetComponent<Pices>().data.type.ToString() + "    ";     
             }
-        print(final);
+            line += "\n";
         }
+        print(final);
+    }
 
+    void InstanceCreator(int i,PiecesTypes type,bool isWhite = true)
+    {
+        board[i].AddComponent<Pices>();
+        board[i].GetComponent<Pices>().data.type = type;
+        board[i].GetComponent<Pices>().data.isWhite = isWhite;
+        float xPosition = startPosition.x + i % 8;
+        float yPosition = startPosition.y + (i / 8) - (float)0.45;
+        board[i] = Instantiate(board[i].GetComponent<Pices>().getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
+        board[i].AddComponent<BoxCollider2D>();
+        board[i].AddComponent<Pices>();
+    }
 
     private bool createStartingPieces(){
 
-        for (int i = 0; i < 64; i++)
-            board[i] = new Pices();
 
         ///White Pawns
 
         for (int i = 8; i < 16; i++) {
-            board[i].type = PiecesTypes.Pawn;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float) 0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition,yPosition,-1), Quaternion.identity);
+            InstanceCreator(i, PiecesTypes.Pawn);
         }
 
         ///Black Pawns
 
         for (int i = 48; i < 56; i++){
-            board[i].type = PiecesTypes.Pawn;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
+            InstanceCreator(i, PiecesTypes.Pawn,false);
         }
 
         ///Rooks White
 
-        {
-            int i = 0;
-            board[i].type = PiecesTypes.Rook;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+        
+            InstanceCreator(0, PiecesTypes.Rook);
+        
 
-        {
-            int i = 7;
-            board[i].type = PiecesTypes.Rook;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+            InstanceCreator(7, PiecesTypes.Rook);
+        
 
         ///Rooks Black
         
-        {
-            int i = 56;
-            board[i].type = PiecesTypes.Rook;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+        
+            InstanceCreator(56, PiecesTypes.Rook,false);
 
-        {
-            int i = 63;
-            board[i].type = PiecesTypes.Rook;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+
+            InstanceCreator(63, PiecesTypes.Rook, false);
 
         ///Knight White
-       
-        {
-            int i = 1;
-            board[i].type = PiecesTypes.Knight;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
 
-        {
-            int i = 6;
-            board[i].type = PiecesTypes.Knight;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+            InstanceCreator(1, PiecesTypes.Knight);
+
+            InstanceCreator(6, PiecesTypes.Knight);
 
         ///Knight Black
-        
-        {
-            int i = 57;
-            board[i].type = PiecesTypes.Knight;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
 
-        {
-            int i = 62;
-            board[i].type = PiecesTypes.Knight;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+            InstanceCreator(57, PiecesTypes.Knight,false);
+
+            InstanceCreator(62, PiecesTypes.Knight,false);
 
         ///Bishop White
-
-        {
-            int i = 2;
-            board[i].type = PiecesTypes.Bishop;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
-
-        {
-            int i = 5;
-            board[i].type = PiecesTypes.Bishop;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+            InstanceCreator(2, PiecesTypes.Bishop);
+            InstanceCreator(5, PiecesTypes.Bishop);
 
         ///Bishop Black
+            InstanceCreator(58, PiecesTypes.Bishop,false);
 
-        {
-            int i = 58;
-            board[i].type = PiecesTypes.Bishop;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
 
-        {
-            int i = 61;
-            board[i].type = PiecesTypes.Bishop;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+            InstanceCreator(61, PiecesTypes.Bishop, false);
 
         ///King White
-        
-        {
-            int i = 3;
-            board[i].type = PiecesTypes.King;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+
+            InstanceCreator(3, PiecesTypes.King);
 
         ///King Black
 
-        {
-            int i = 59;
-            board[i].type = PiecesTypes.King;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+            InstanceCreator(59, PiecesTypes.King,false);
 
         ///Queen White
 
-        {
-            int i = 4;
-            board[i].type = PiecesTypes.Queen;
-            board[i].isWhite = true;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+            InstanceCreator(4, PiecesTypes.Queen);
 
         ///Queen Black
+            
+            InstanceCreator(60, PiecesTypes.Queen,false);
 
-        {
-            int i = 60;
-            board[i].type = PiecesTypes.Queen;
-            board[i].isWhite = false;
-            float xPosition = startPosition.x + i % 8;
-            float yPosition = startPosition.y + (i / 8) - (float)0.45;
-            Instantiate(board[i].getArtPiece(), new Vector3(xPosition, yPosition, -1), Quaternion.identity);
-        }
+
+        //foreach(GameObject piece in board)
+        //{
+        //    if (piece.GetComponent<Pices>().data.type != PiecesTypes.Null)
+        //    {
+        //        piece.AddComponent<BoxCollider2D>();
+        //        piece.GetComponent<BoxCollider2D>();
+        //        print(piece.GetComponent<Pices>().data.type.ToString() + "  " + piece.transform.position);
+
+        //    }
+        //}
 
 
 

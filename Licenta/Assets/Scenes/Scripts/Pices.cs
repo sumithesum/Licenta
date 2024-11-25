@@ -1,32 +1,61 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.Burst.Intrinsics;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 using static Utils;
 
 
-public class Pices
+public class Pices :MonoBehaviour
 {
-    
-    public bool isWhite = true;
-    
-    
-    public Vector3 position ;
 
-   
-    public PiecesTypes type = PiecesTypes.Null;
+    public PieceData data = new PieceData();
+    private bool isDragging = false;
+    private Vector3 initialPos;
+    private Vector3 offset;
 
-    bool isDrgging = false;
 
-   
+
+    private void OnMouseDown()
+    {
+        isDragging = true;
+        initialPos = this.transform.position;
+        offset = initialPos - this.GetMouseWorldPosition();
+        
+
+    }
+
+    private void OnMouseDrag()
+    {
+        this.transform.position = this.GetMouseWorldPosition() + offset;
+    }
+
+    private void OnMouseUp()
+    {
+        isDragging = false;
+    }
+
+    public void Move()
+    {
+            ////Actual logic of movement to be implemented;
+    }
+
+    private Vector3 GetMouseWorldPosition()
+    {
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        mouseScreenPosition.z = -1f; 
+        return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
    
@@ -35,9 +64,9 @@ public class Pices
     public GameObject getArtPiece()
     {
 
-        string path = "Art/" + type.ToString();
+        string path = "Art/" + data.type.ToString();
 
-        if (isWhite)
+        if (data.isWhite)
             path += "White";
         else 
             path += "Black";
