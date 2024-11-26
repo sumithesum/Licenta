@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using static Utils;
+using static GameManager;
 
 
 public class Pices :MonoBehaviour
@@ -14,6 +15,7 @@ public class Pices :MonoBehaviour
 
     public PieceData data = new PieceData();
     private bool isDragging = false;
+    [SerializeField]
     private Vector3 initialPos;
     private Vector3 offset;
 
@@ -36,12 +38,39 @@ public class Pices :MonoBehaviour
     private void OnMouseUp()
     {
         isDragging = false;
+        Move();
     }
 
     public void Move()
     {
-            ////Actual logic of movement to be implemented;
+        ///Check if the new pos is the same as old pos (more or less)
+        if (this.transform.position.x < (initialPos.x + 0.5f) && this.transform.position.x > (initialPos.x - 0.5f) &&
+            this.transform.position.y < (initialPos.y + 0.95f) && this.transform.position.y > (initialPos.y - 0.05f))
+        {
+            this.transform.position = initialPos;
+            print("smth wrong");
+        }
+
+        ///Check if is the player turn (100% will need to be changed in the future)
+        ///And check if the next pos to be moved is on the board 
+        
+
+        else if (((this.name.EndsWith("White(Clone)") && isWhiteTurn) || (this.name.EndsWith("Black(Clone)") && !isWhiteTurn)) && 
+            (this.transform.position.x <= endPosition.x && this.transform.position.x >= (startPosition.x - 0.5f) &&
+            this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f)) && 
+            Movement())
+        {
+            if (isWhiteTurn)
+                isWhiteTurn = false;
+            else
+                isWhiteTurn = true;
+        }
+        else
+            this.transform.position = initialPos;
+           
     }
+
+    
 
     private Vector3 GetMouseWorldPosition()
     {

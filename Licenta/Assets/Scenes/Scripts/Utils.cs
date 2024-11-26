@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Utils : MonoBehaviour
+public class Utils 
 {
+    public static bool isWhiteTurn = true;
+    public static Vector3 startPosition = new Vector3(0.5f, 0.5f , -1f);
+    public static Vector3 endPosition = new Vector3(8f, 8f , -1f);
 
-    public enum PiecesTypes
+    public  enum  PiecesTypes
     {
         Null,
         Pawn ,

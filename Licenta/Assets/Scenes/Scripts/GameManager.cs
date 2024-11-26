@@ -7,16 +7,16 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static Utils;
 
-public class BoardCreate : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 
-    [SerializeField]
-    public Vector2 startPosition = new Vector2(1.5f, 0.5f);
+    
+
 
     private GameObject whitePrefab;
     private GameObject blackPrefab;
 
-    public GameObject [] board = new GameObject[64];
+    public GameObject[] board = new GameObject[64];
 
     private bool createEmptyMap()
     {
@@ -26,12 +26,12 @@ public class BoardCreate : MonoBehaviour
             if (i % 8 == 0)
                 alb = alb == true ? false : true;
             if (!alb) {
-                board[i] = Instantiate(blackPrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
+                Instantiate(blackPrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
                 alb = true;
             }
             else
             {
-                board[i] = Instantiate(whitePrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
+                Instantiate(whitePrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
                 alb = false;
             }
 
@@ -39,6 +39,8 @@ public class BoardCreate : MonoBehaviour
         return true;
     }
 
+
+ 
     void printBoard()
     {
         string final = "";
@@ -46,16 +48,18 @@ public class BoardCreate : MonoBehaviour
         {
             string line = "";
             for (int j = 0; j < 8; j++)
-            {
-                line += board[i * 8 + j].GetComponent<Pices>().data.type.ToString() + "    ";     
-            }
-            line += "\n";
+                if (board[i*8+j].name != "Null" )
+                  line += board[i*8 + j].name + "    ";
+                else
+                    line += board[i * 8 + j].name + "                               ";
+            final += line + "\n" + "\n";
         }
         print(final);
     }
 
     void InstanceCreator(int i,PiecesTypes type,bool isWhite = true)
     {
+        board[i] = new GameObject();
         board[i].AddComponent<Pices>();
         board[i].GetComponent<Pices>().data.type = type;
         board[i].GetComponent<Pices>().data.isWhite = isWhite;
@@ -68,6 +72,9 @@ public class BoardCreate : MonoBehaviour
 
     private bool createStartingPieces(){
 
+        for (int i = 16; i < 48; i++) 
+            board[i] = new GameObject("Null");
+                
 
         ///White Pawns
 
@@ -156,7 +163,8 @@ public class BoardCreate : MonoBehaviour
 
     private void Start()
     {
-        
+        board = new GameObject[64];
+
         whitePrefab = Resources.Load<GameObject>("Tiles/Tile_White");
         blackPrefab = Resources.Load<GameObject>("Tiles/Tile_Green");
 
@@ -177,6 +185,12 @@ public class BoardCreate : MonoBehaviour
                 if (createStartingPieces())
                     printBoard();
             
+    }
+
+
+    public static bool Movement()
+    {
+        return true;
     }
 
     
