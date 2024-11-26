@@ -12,9 +12,9 @@ using static GameManager;
 
 public class Pices :MonoBehaviour
 {
-
+    [SerializeField]
     public PieceData data = new PieceData();
-    private bool isDragging = false;
+    
     [SerializeField]
     private Vector3 initialPos;
     private Vector3 offset;
@@ -23,7 +23,7 @@ public class Pices :MonoBehaviour
 
     private void OnMouseDown()
     {
-        isDragging = true;
+        
         initialPos = this.transform.position;
         offset = initialPos - this.GetMouseWorldPosition();
         
@@ -37,7 +37,6 @@ public class Pices :MonoBehaviour
 
     private void OnMouseUp()
     {
-        isDragging = false;
         Move();
     }
 
@@ -48,7 +47,6 @@ public class Pices :MonoBehaviour
             this.transform.position.y < (initialPos.y + 0.95f) && this.transform.position.y > (initialPos.y - 0.05f))
         {
             this.transform.position = initialPos;
-            print("smth wrong");
         }
 
         ///Check if is the player turn (100% will need to be changed in the future)
@@ -58,12 +56,16 @@ public class Pices :MonoBehaviour
         else if (((this.name.EndsWith("White(Clone)") && isWhiteTurn) || (this.name.EndsWith("Black(Clone)") && !isWhiteTurn)) && 
             (this.transform.position.x <= endPosition.x && this.transform.position.x >= (startPosition.x - 0.5f) &&
             this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f)) && 
-            Movement())
+            Movement(initialPos,this.transform.position))
         {
             if (isWhiteTurn)
                 isWhiteTurn = false;
             else
                 isWhiteTurn = true;
+
+            this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.05f, -1); 
+
+            printBoard();
         }
         else
             this.transform.position = initialPos;

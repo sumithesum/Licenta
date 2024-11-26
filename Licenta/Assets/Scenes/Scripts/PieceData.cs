@@ -6,6 +6,7 @@ using static Utils;
 public class PieceData 
 {
     public bool isWhite = true;
+    public bool firstMove = true;
 
 
     public PiecesTypes type = PiecesTypes.Null;
@@ -14,10 +15,12 @@ public class PieceData
     {
         type = type_;
         isWhite = isWhite_;
+        firstMove = true;
     }
     public PieceData()
     {
         type = PiecesTypes.Null;
         isWhite = true;
+        firstMove = true;
     }
 }
