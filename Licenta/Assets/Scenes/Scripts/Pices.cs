@@ -37,14 +37,14 @@ public class Pices :MonoBehaviour
 
     private void OnMouseUp()
     {
-        Move();
+        StartCoroutine( Move());
     }
 
-    public void Move()
+    public IEnumerator Move()
     {
         ///Check if the new pos is the same as old pos (more or less)
         if (this.transform.position.x < (initialPos.x + 0.5f) && this.transform.position.x > (initialPos.x - 0.5f) &&
-            this.transform.position.y < (initialPos.y + 0.95f) && this.transform.position.y > (initialPos.y - 0.05f))
+            this.transform.position.y < (initialPos.y + 0.5f) && this.transform.position.y > (initialPos.y - 0.5f))
         {
             this.transform.position = initialPos;
         }
@@ -63,9 +63,11 @@ public class Pices :MonoBehaviour
             else
                 isWhiteTurn = true;
 
-            this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.05f, -1); 
+            this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.5f, -1); 
 
             printBoard();
+            yield return new WaitForSeconds(1f);
+            changeReferencePoint();
         }
         else
             this.transform.position = initialPos;
