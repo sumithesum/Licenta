@@ -46,12 +46,11 @@ public class Pices :MonoBehaviour
 
         ///Check if is the player turn (100% will need to be changed in the future)
         ///And check if the next pos to be moved is on the board 
-        
 
         else if (((this.name.EndsWith("White(Clone)") && isWhiteTurn) || (this.name.EndsWith("Black(Clone)") && !isWhiteTurn)) && 
             (this.transform.position.x <= endPosition.x && this.transform.position.x >= (startPosition.x - 0.5f) &&
             this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f)) && 
-            Movement(initialPos,this.transform.position))
+            Movement(initialPos,this.transform.position) != 0)
         {
             if (isWhiteTurn)
                 isWhiteTurn = false;
@@ -98,7 +97,6 @@ public class Pices :MonoBehaviour
         else 
             path += "Black";
 
-        print(path);
 
         return Resources.Load<Material>(path);
 
@@ -123,6 +121,15 @@ public class Pices :MonoBehaviour
         //else if (type == PiecesTypes.Bishop && !isWhite)
         //    return Resources.Load<GameObject>("Art/PawnBlack");
 
+    }
+
+
+
+    public bool ckechIfKingIsAlive(bool isWhite)
+    {
+        if (isWhite)
+            ;
+        return true;
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -12,6 +13,11 @@ public class GameManager : MonoBehaviour
 
 
 
+    public bool isWhiteInCheck = false;
+    public bool isBlackInCheck = false;
+
+    public int blackKingPos = 59;
+    public int whiteKingPos = 3;
 
     private GameObject whitePrefab;
     private GameObject blackPrefab;
@@ -229,9 +235,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="startPos"></param>
     /// <param name="endPos"></param>
-    /// <returns></returns>
+    /// <returns> 
+    /// 0 if the movement is not possible 
+    /// 1 if the movement is possible and no piece is captured 
+    /// 2 if the movement is possible and a piece is captured 
+    /// </returns>
 
-    public static bool Movement(Vector3 startPos, Vector3 endPos)
+    public static int Movement(Vector3 startPos, Vector3 endPos)
     {
         ///Transform the position in board index`s
         int indexStart = ((int)startPos.y) * 8 + ((int)startPos.x);
@@ -261,7 +271,7 @@ public class GameManager : MonoBehaviour
                         board[indexEnd] = board[indexStart];
                         board[indexStart] = new GameObject("Null");
 
-                        return true;
+                        return 2;
                     }
 
 
@@ -276,13 +286,13 @@ public class GameManager : MonoBehaviour
                     if (isAPiece)
                     {
 
-                        return false;
+                        return 0;
                     }
 
                     if (!board[indexStart].GetComponent<Pices>().data.firstMove && movement == 16)
                     {
 
-                        return false;
+                        return 0;
                     }
 
                     if (board[indexStart].GetComponent<Pices>().data.firstMove && movement == 16)
@@ -294,7 +304,7 @@ public class GameManager : MonoBehaviour
                         if (isAPiece)
                         {
 
-                            return false;
+                            return 0;
                         }
 
                         board[indexStart].GetComponent<Pices>().data.firstMove = false;
@@ -302,7 +312,7 @@ public class GameManager : MonoBehaviour
                         board[indexStart] = board[indexEnd];
                         board[indexEnd] = aux;
 
-                        return true;
+                        return 2;
 
                     }
 
@@ -313,12 +323,12 @@ public class GameManager : MonoBehaviour
                         board[indexStart] = board[indexEnd];
                         board[indexEnd] = aux;
 
-                        return true;
+                        return 2;
                     }
 
 
 
-                    return false;
+                    return 0;
 
                 }
 
@@ -336,7 +346,7 @@ public class GameManager : MonoBehaviour
                         board[indexEnd] = board[indexStart];
                         board[indexStart] = new GameObject("Null");
 
-                        return true;
+                        return 2;
                     }
 
 
@@ -351,13 +361,13 @@ public class GameManager : MonoBehaviour
                     if (isAnEnemy)
                     {
 
-                        return false;
+                        return 0;
                     }
 
                     if (!board[indexStart].GetComponent<Pices>().data.firstMove && movement == -16)
                     {
 
-                        return false;
+                        return 0;
                     }
 
                     if (board[indexStart].GetComponent<Pices>().data.firstMove && movement == -16)
@@ -369,14 +379,14 @@ public class GameManager : MonoBehaviour
                         if (isAnEnemy)
                         {
 
-                            return false;
+                            return 0;
                         }
                         board[indexStart].GetComponent<Pices>().data.firstMove = false;
                         GameObject aux = board[indexStart];
                         board[indexStart] = board[indexEnd];
                         board[indexEnd] = aux;
 
-                        return true;
+                        return 1;
 
                     }
 
@@ -387,12 +397,12 @@ public class GameManager : MonoBehaviour
                         board[indexStart] = board[indexEnd];
                         board[indexEnd] = aux;
 
-                        return true;
+                        return 1;
                     }
 
 
 
-                    return false;
+                    return 0;
 
                 }
 
@@ -411,44 +421,63 @@ public class GameManager : MonoBehaviour
                             board[indexStart] = board[indexEnd];
                             board[indexEnd] = aux;
 
-                            return true;
+                            return 1;
                         }
                         else if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                         {
                             Destroy(board[indexEnd]);
                             board[indexEnd] = board[indexStart];
                             board[indexStart] = new GameObject("Null");
-                            return true;
+                            return 2;
                         }
                     }
 
-                    return false;
+                    return 0;
                 }
 
 
             case "BishopWhite(Clone)":
             case "BishopBlack(Clone)":
                 {
-                   
-                    if(movement % 7 == 0 || movement % 9 == 0)
+                    int direction = 0;
+
+                    if (movement % 7 == 0)
+                    {
+                        direction = 7;
+                    }
+                    else
+                    {
+                        direction = 9;
+
+                    }
+                    
+                    for (int i = direction; i < movement * (movement / Math.Abs(movement)); i += direction)
+                        {
+                
+                            if (board[i * (movement / Math.Abs(movement)) + indexStart].name != "Null")
+                                return 0;
+                        }
+
+
+                    if (movement % 7 == 0 || movement % 9 == 0)
                     {
                         if (board[indexEnd].name == "Null")
                         {
                             GameObject aux = board[indexEnd];
                             board[indexEnd] = board[indexStart];
                             board[indexStart] = aux;
-                            return true;
+                            return  1;
                         }
                         if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                         {
                             Destroy(board[indexEnd]);
                             board[indexEnd] = board[indexStart];
                             board[indexStart] = new GameObject("Null");
-                            return true;
+                            return 2;
                         }
 
                     }
-                    return false;
+                    return 0;
                 }
 
 
@@ -457,14 +486,14 @@ public class GameManager : MonoBehaviour
                 {
                     ///Quite Hard
                     ///
-                    ///Momenta fara logica de Cstleling (cred ca o sa fie facuta la rege)
+                    ///Momenta fara logica de Castleling (cred ca o sa fie facuta la rege)
 
                     //Verificam daca e pe diagonala.
                     if (
                         ((int)(indexStart / 8) != (int)(indexEnd / 8)) &&
                         (indexStart % 8 != indexEnd % 8)
                        )
-                        return false;
+                        return 0;
 
 
                     //Checks if the piece is moving vertycaly
@@ -475,16 +504,14 @@ public class GameManager : MonoBehaviour
                             for (int i = 1; i < movement / 8; i++)
                                 if (board[indexStart + 8 * i].name != "Null")
                                 {
-                                    print(indexStart + 8 * i + "    " + board[indexStart + 8 * i].name);
-                                    return false;
+                                    return 0;
                                 }
                         }
                         else
                             for (int i = 1; i < movement / 8 * (-1); i++)
                                 if (board[indexStart - 8 * i].name != "Null")
                                 {
-                                    print(indexStart - 8 * i + "    " + board[indexStart + 8 * i].name);
-                                    return false;
+                                    return 0;
                                 }
                         //verific daca e o piesa in drum
                     }
@@ -496,7 +523,7 @@ public class GameManager : MonoBehaviour
                         board[indexStart] = board[indexEnd];
                         board[indexEnd] = aux;
 
-                        return true;
+                        return 1;
                     }
                     //Culori diferite
                     else if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
@@ -505,29 +532,121 @@ public class GameManager : MonoBehaviour
                         Destroy(board[indexEnd]);
                         board[indexEnd] = board[indexStart];
                         board[indexStart] = new GameObject("Null");
-                        return true;
+                        return 2;
 
                     }
 
 
                     
-                    return false;
+                    return 0;
                 }
 
             case "QueenWhite(Clone)":
             case "QueenBlack(Clone)":
                 {
-                    
-                    // make the project 3d not 2d
-                    return false;
+                    //Bishop
+                    if (movement % 7 == 0 || movement % 9 == 0)
+                    {
+                        if (board[indexEnd].name == "Null")
+                        {
+                            GameObject aux = board[indexEnd];
+                            board[indexEnd] = board[indexStart];
+                            board[indexStart] = aux;
+                            return 1;
+                        }
+                        if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
+                        {
+                            Destroy(board[indexEnd]);
+                            board[indexEnd] = board[indexStart];
+                            board[indexStart] = new GameObject("Null");
+                            return 2;
+                        }
+
+                    }
+
+                    //Rook
+
+                    if (movement % 8 == 0)
+                    {
+                        if (movement > 0)
+                        {
+                            for (int i = 1; i < movement / 8; i++)
+                                if (board[indexStart + 8 * i].name != "Null")
+                                {
+                                    print(indexStart + 8 * i + "    " + board[indexStart + 8 * i].name);
+                                    return 0;
+                                }
+                        }
+                        else
+                            for (int i = 1; i < movement / 8 * (-1); i++)
+                                if (board[indexStart - 8 * i].name != "Null")
+                                {
+                                    print(indexStart - 8 * i + "    " + board[indexStart + 8 * i].name);
+                                    return 0;
+                                }
+                        //verific daca e o piesa in drum
+                    }
+
+
+                    if (board[indexEnd].name == "Null")
+                    {
+                        GameObject aux = board[indexStart];
+                        board[indexStart] = board[indexEnd];
+                        board[indexEnd] = aux;
+
+                        return 1;
+                    }
+                    //Culori diferite
+                    else if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
+                    {
+
+                        Destroy(board[indexEnd]);
+                        board[indexEnd] = board[indexStart];
+                        board[indexStart] = new GameObject("Null");
+                        return 2;
+
+                    }
+
+
+
+                    return 0;
                 }
+
+            case "KingWhite(Clone)":
+            case "KingBlack(Clone)":
+                {
+
+                    if (movement == 1 || movement == -1 || movement == 8 || movement == -8 || movement == 7 || movement == -7 || movement == 9 || movement == -9)
+                    {
+                        if (board[indexEnd].name == "Null")
+                        {
+                            GameObject aux = board[indexEnd];
+                            board[indexEnd] = board[indexStart];
+                            board[indexStart] = aux;
+                            return 1;
+                        }
+                        if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
+                        {
+                            Destroy(board[indexEnd]);
+                            board[indexEnd] = board[indexStart];
+                            board[indexStart] = new GameObject("Null");
+                            return 2;
+                        }
+                    }
+
+                    return 0;
+                
+                }
+          
         }
 
 
 
-        return false;
+        return 0;
     }
 
+    // In loc de check/checkmate este daca 'capturezi' regele inamic (minigame idk how hard)
 
-   
+
+
 }
