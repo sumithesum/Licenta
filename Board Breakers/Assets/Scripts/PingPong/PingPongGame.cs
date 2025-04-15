@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine;
-
 public class PingPongGame : MonoBehaviour
 {
     public int P1score = 0;

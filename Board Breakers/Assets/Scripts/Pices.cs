@@ -1,14 +1,19 @@
-﻿using System.Collections;
-using Unity.VisualScripting;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using UnityEngine;
 using static Utils;
 using static GameManager;
+using FishNet.Object;
+using static OnlineSend;
 
 
-public class Pices :MonoBehaviour
+
+public class Pices : NetworkBehaviour
 {
     [SerializeField]
     public PieceData data = new PieceData();
+
+    public GameObject gameManager ;
     
     [SerializeField]
     private Vector3 initialPos;
@@ -37,6 +42,9 @@ public class Pices :MonoBehaviour
 
     public IEnumerator Move()
     {
+
+  
+
         ///Check if the new pos is the same as old pos (more or less)
         if (this.transform.position.x < (initialPos.x + 0.5f) && this.transform.position.x > (initialPos.x - 0.5f) &&
             this.transform.position.y < (initialPos.y + 0.5f) && this.transform.position.y > (initialPos.y - 0.5f))
@@ -50,25 +58,29 @@ public class Pices :MonoBehaviour
         else if (((this.name.EndsWith("White(Clone)") && isWhiteTurn) || (this.name.EndsWith("Black(Clone)") && !isWhiteTurn)) && 
             (this.transform.position.x <= endPosition.x && this.transform.position.x >= (startPosition.x - 0.5f) &&
             this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f)) && 
-            Movement(initialPos,this.transform.position) != 0)
+            Movement(initialPos,this.transform.position) != 0  )
         {
             if (isWhiteTurn)
                 isWhiteTurn = false;
             else
                 isWhiteTurn = true;
 
+
+            OnlineSend.Local.SendMoveFromLocal(initialPos, this.transform.position);
+
+
             this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.5f, -1); 
 
             printBoard();
             yield return new WaitForSeconds(1f);
-            changeReferencePoint();
+            
         }
         else
             this.transform.position = initialPos;
            
     }
 
-    
+
 
     private Vector3 GetMouseWorldPosition()
     {
