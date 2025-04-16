@@ -1,9 +1,17 @@
 ScriptsOnlyBuild:
   usedScripts:
+    Assembly-CSharp:
+    - CameraManager
+    - Nert
+    - OnlineSend
+    - Send
+    - VectorSender
     Assembly-CSharp.dll:
     - CameraManager
+    - Nert
     - OnlineSend
-    - ServerMnager
+    - Send
+    - VectorSender
     FishNet.Demos.dll:
     - FishNet.Demo.AdditiveScenes.Player
     - FishNet.Demo.Benchmarks.NetworkTransforms.MoveRandomlyNonPhysics
@@ -16,6 +24,8 @@ ScriptsOnlyBuild:
     - FishNet.Example.ColliderRollbacks.PlayerMotor
     - FishNet.Example.NetworkHudCanvases
     - FishNet.Example.Scened.PlayerController
+    FishNet.Runtime:
+    - FishNet.Object.NetworkObject
     FishNet.Runtime.dll:
     - FishNet.Component.Observing.SceneCondition
     - FishNet.Component.Prediction.NetworkTrigger
@@ -129,73 +139,77 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1564}
+      Script: {instanceID: 1566}
     - Class: 114
-      Script: {instanceID: 1618}
+      Script: {instanceID: 1620}
     - Class: 114
-      Script: {instanceID: 1832}
+      Script: {instanceID: 1834}
     - Class: 114
-      Script: {instanceID: 1842}
+      Script: {instanceID: 1844}
     - Class: 114
-      Script: {instanceID: 2300}
+      Script: {instanceID: 2302}
     - Class: 114
-      Script: {instanceID: 3048}
+      Script: {instanceID: 2676}
     - Class: 114
-      Script: {instanceID: 3368}
+      Script: {instanceID: 3050}
     - Class: 114
-      Script: {instanceID: 3380}
+      Script: {instanceID: 3370}
     - Class: 114
-      Script: {instanceID: 3406}
+      Script: {instanceID: 3382}
     - Class: 114
-      Script: {instanceID: 3642}
+      Script: {instanceID: 3408}
     - Class: 114
-      Script: {instanceID: 3672}
+      Script: {instanceID: 3644}
     - Class: 114
-      Script: {instanceID: 4110}
+      Script: {instanceID: 3674}
     - Class: 114
-      Script: {instanceID: 4310}
+      Script: {instanceID: 4112}
     - Class: 114
-      Script: {instanceID: 4474}
+      Script: {instanceID: 4312}
     - Class: 114
-      Script: {instanceID: 4600}
+      Script: {instanceID: 4476}
     - Class: 114
-      Script: {instanceID: 4714}
+      Script: {instanceID: 4602}
     - Class: 114
-      Script: {instanceID: 4880}
+      Script: {instanceID: 4716}
     - Class: 114
-      Script: {instanceID: 4918}
+      Script: {instanceID: 4882}
     - Class: 114
-      Script: {instanceID: 5000}
+      Script: {instanceID: 4920}
     - Class: 114
-      Script: {instanceID: 5084}
+      Script: {instanceID: 5002}
     - Class: 114
-      Script: {instanceID: 5266}
+      Script: {instanceID: 5086}
     - Class: 114
-      Script: {instanceID: 5272}
+      Script: {instanceID: 5268}
     - Class: 114
-      Script: {instanceID: 5360}
+      Script: {instanceID: 5362}
     - Class: 114
-      Script: {instanceID: 5696}
+      Script: {instanceID: 5698}
     - Class: 114
-      Script: {instanceID: 5772}
+      Script: {instanceID: 5774}
     - Class: 114
-      Script: {instanceID: 6608}
+      Script: {instanceID: 6610}
     - Class: 114
-      Script: {instanceID: 6790}
+      Script: {instanceID: 6792}
     - Class: 114
-      Script: {instanceID: 6916}
+      Script: {instanceID: 6918}
     - Class: 114
-      Script: {instanceID: 7202}
+      Script: {instanceID: 7204}
     - Class: 114
-      Script: {instanceID: 7406}
+      Script: {instanceID: 7408}
     - Class: 114
-      Script: {instanceID: 8102}
+      Script: {instanceID: 8104}
     - Class: 114
-      Script: {instanceID: 8242}
+      Script: {instanceID: 8244}
     - Class: 114
-      Script: {instanceID: 9000}
+      Script: {instanceID: 9002}
     - Class: 114
-      Script: {instanceID: 9130}
+      Script: {instanceID: 9132}
+    - Class: 114
+      Script: {instanceID: 26160}
+    - Class: 114
+      Script: {instanceID: 27098}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -227,6 +241,12 @@ ScriptsOnlyBuild:
     - Class: 850595691
       Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: b8b34ea2c15d0a8588f36e9b18ba5504
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Pices
   - hash:
       serializedVersion: 2
       Hash: d41ab9b5ea92474f9c0a6937a0607ce1
@@ -445,6 +465,12 @@ ScriptsOnlyBuild:
     className: UnityOnBecameVisibleMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 1c893ed1d111cf1c9ba72f185ac90955
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: VectorSender
+  - hash:
+      serializedVersion: 2
       Hash: 51d474ab212336a6821377d08141427f
     assemblyName: GameKit.Dependencies
     namespaceName: GameKit.Dependencies.Utilities.ObjectPooling.Examples
@@ -497,12 +523,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: b8b34ea2c15d0a8588f36e9b18ba5504
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Pices
   - hash:
       serializedVersion: 2
       Hash: ed8bac09ffacadca9994789e381c69ce
@@ -1991,6 +2011,30 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: be49e4b49414e948087e2d8364d28fbb
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Network
+  - hash:
+      serializedVersion: 2
+      Hash: 2ae50a910598bafb25bb3544f1a46fd9
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Nert
+  - hash:
+      serializedVersion: 2
+      Hash: 22c5450a1ac58cf87436a12e60d61650
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: SendMesaje
+  - hash:
+      serializedVersion: 2
+      Hash: 7edeba2f0f450c84bec408af020f79dc
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Send
   platform: 19
   scenePathNames:
   - Assets/Scenes/Online Games/MainGame.unity

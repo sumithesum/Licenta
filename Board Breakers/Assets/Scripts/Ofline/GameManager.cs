@@ -247,7 +247,7 @@ public class GameManager : MonoBehaviour
     /// 1 if the movement is possible and no piece is captured 
     /// 2 if the movement is possible and a piece is captured 
     /// </returns>
-    public static int Movement(Vector3 startPos, Vector3 endPos)
+    public static int Movement(Vector3 startPos, Vector3 endPos,bool recived)
     {
         
         ///Transform the position in board index`s
@@ -255,11 +255,23 @@ public class GameManager : MonoBehaviour
         int indexEnd = ((int)endPos.y) * 8 + ((int)endPos.x);
         int movement = indexEnd - indexStart;
 
+        if (recived)
+        {
+            print("Se face miscarea");
+            print(board[indexStart].gameObject.transform.position);
+            board[indexStart].gameObject.transform.position = endPos;
+            print("Sa facut miscarea");
+            print(board[indexStart].gameObject.transform.position);
+            
+        }
+
         ///Ok now the logic for movement of evry piece (and the atack logic) 
 
-        if (board[indexStart].GetComponent<Pices>().data.isWhite != isWhiteStatic)
+        if (recived || (board[indexStart].GetComponent<Pices>().data.isWhite != isWhiteStatic))
             return 0;
-        
+
+
+
         switch (board[indexStart].name)
         {
             case "PawnWhite(Clone)":

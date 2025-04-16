@@ -364,6 +364,8 @@
 "Assets/FishNet/Upgrading/EdgegapMenu.cs"
 "Assets/FishNet/Upgrading/MirrorUpgrade.cs"
 "Assets/FishNet/Upgrading/UpgradeFromMirrorMenu.cs"
+"Assets/Nert.cs"
+"Assets/Network.cs"
 "Assets/Scripts/CameraManager.cs"
 "Assets/Scripts/Ofline/GameManager.cs"
 "Assets/Scripts/Online/OnlineSend.cs"
@@ -372,6 +374,8 @@
 "Assets/Scripts/PieceData.cs"
 "Assets/Scripts/PingPong/PingPongGame.cs"
 "Assets/Scripts/Utils.cs"
+"Assets/Send.cs"
+"Assets/SendMesaje.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs"
@@ -406,6 +410,7 @@
 "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs"
+"Assets/VectorSender.cs"
 -langversion:9.0
 /deterministic
 /optimize+

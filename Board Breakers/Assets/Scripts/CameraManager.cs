@@ -2,6 +2,7 @@
 using FishNet.Object;
 using FishNet;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class CameraManager : NetworkBehaviour
 {
@@ -11,7 +12,7 @@ public class CameraManager : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        if (base.IsOwner)
+        if (IsOwner)
         {
             pCamera = Camera.main;
             gameObject.AddComponent<GameManager>();
@@ -20,8 +21,8 @@ public class CameraManager : NetworkBehaviour
             RequestPlayerColorServerRpc();
         }
         else
-        {
-            gameObject.GetComponent<GameManager>().enabled = false;
+        { 
+            gameObject.GetComponent<CameraManager>().enabled = false;
 
         }
     }
@@ -40,15 +41,10 @@ public class CameraManager : NetworkBehaviour
     [TargetRpc]
     private void TargetReceivePlayerColor(NetworkConnection conn, bool isWhite)
     {
-        Debug.Log($"[Client] Am primit culoarea de la server: isWhite={isWhite}");
+        Debug.Log($"[Client] Am primit culoarea de la server: {isWhite}");
 
         GameManager.isWhiteStatic = isWhite;
         gameObject.GetComponent<GameManager>().changeReferencePoint();
 
-        // Activează camera dacă e local player
-        if (base.IsOwner)
-        {
-            Camera.main.gameObject.SetActive(true);
-        }
     }
 }

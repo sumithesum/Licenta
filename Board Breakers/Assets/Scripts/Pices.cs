@@ -37,10 +37,10 @@ public class Pices : NetworkBehaviour
 
     private void OnMouseUp()
     {
-        StartCoroutine( Move());
+        StartCoroutine( Move(false));
     }
 
-    public IEnumerator Move()
+    public IEnumerator Move(bool recived)
     {
 
   
@@ -58,16 +58,18 @@ public class Pices : NetworkBehaviour
         else if (((this.name.EndsWith("White(Clone)") && isWhiteTurn) || (this.name.EndsWith("Black(Clone)") && !isWhiteTurn)) && 
             (this.transform.position.x <= endPosition.x && this.transform.position.x >= (startPosition.x - 0.5f) &&
             this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f)) && 
-            Movement(initialPos,this.transform.position) != 0  )
+            Movement(initialPos,this.transform.position,recived) != 0  )
         {
             if (isWhiteTurn)
                 isWhiteTurn = false;
             else
                 isWhiteTurn = true;
 
-
-            OnlineSend.Local.SendMoveFromLocal(initialPos, this.transform.position);
-
+            if (!recived)
+            {
+                print("[Piece]Se trimit miscarea");
+                OnlineSend.Send(initialPos, this.transform.position);
+            }
 
             this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.5f, -1); 
 
