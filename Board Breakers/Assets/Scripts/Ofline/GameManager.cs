@@ -257,18 +257,13 @@ public class GameManager : MonoBehaviour
 
         if (recived)
         {
-            print("Se face miscarea");
-            print(board[indexStart].gameObject.transform.position);
             board[indexStart].gameObject.transform.position = endPos;
-            print("Sa facut miscarea");
-            print(board[indexStart].gameObject.transform.position);
-            
         }
 
         ///Ok now the logic for movement of evry piece (and the atack logic) 
-
-        if (recived || (board[indexStart].GetComponent<Pices>().data.isWhite != isWhiteStatic))
-            return 0;
+        if(!recived)
+            if ((board[indexStart].GetComponent<Pices>().data.isWhite != isWhiteStatic))
+                return 0;
 
 
 

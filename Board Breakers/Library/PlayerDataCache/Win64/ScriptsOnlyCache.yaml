@@ -2,16 +2,20 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp:
     - CameraManager
-    - Nert
     - OnlineSend
-    - Send
+    - PlayerEmpty
+    - PlayerManager
     - VectorSender
+    - XOManager
     Assembly-CSharp.dll:
     - CameraManager
-    - Nert
+    - ListTiles
     - OnlineSend
-    - Send
+    - PlayerEmpty
+    - PlayerManager
+    - Test
     - VectorSender
+    - XOManager
     FishNet.Demos.dll:
     - FishNet.Demo.AdditiveScenes.Player
     - FishNet.Demo.Benchmarks.NetworkTransforms.MoveRandomlyNonPhysics
@@ -48,11 +52,19 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
@@ -84,6 +96,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteCharacter
     - TMPro.TMP_SpriteGlyph
     - TMPro.TMP_Style
+    - TMPro.VertexGradient
     UnityEngine.CoreModule:
     - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
@@ -105,7 +118,7 @@ ScriptsOnlyBuild:
     fullTypeName: FishNet.Example.NetworkHudCanvases
     methodName: OnClick_Client
   sceneClasses:
-    Assets/Scenes/Online Games/MainGame.unity:
+    Assets/Scenes/Online Games/X0-Online.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -134,82 +147,96 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1566}
+      Script: {instanceID: 1564}
     - Class: 114
-      Script: {instanceID: 1620}
+      Script: {instanceID: 1618}
     - Class: 114
-      Script: {instanceID: 1834}
+      Script: {instanceID: 1836}
     - Class: 114
-      Script: {instanceID: 1844}
+      Script: {instanceID: 1846}
     - Class: 114
-      Script: {instanceID: 2302}
+      Script: {instanceID: 2306}
     - Class: 114
-      Script: {instanceID: 2676}
+      Script: {instanceID: 2572}
     - Class: 114
-      Script: {instanceID: 3050}
+      Script: {instanceID: 2682}
     - Class: 114
-      Script: {instanceID: 3370}
+      Script: {instanceID: 2730}
     - Class: 114
-      Script: {instanceID: 3382}
+      Script: {instanceID: 2820}
     - Class: 114
-      Script: {instanceID: 3408}
+      Script: {instanceID: 3060}
     - Class: 114
-      Script: {instanceID: 3644}
+      Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 3674}
+      Script: {instanceID: 3396}
     - Class: 114
-      Script: {instanceID: 4112}
+      Script: {instanceID: 3422}
     - Class: 114
-      Script: {instanceID: 4312}
+      Script: {instanceID: 3626}
     - Class: 114
-      Script: {instanceID: 4476}
+      Script: {instanceID: 3660}
     - Class: 114
-      Script: {instanceID: 4602}
+      Script: {instanceID: 3690}
     - Class: 114
-      Script: {instanceID: 4716}
+      Script: {instanceID: 4128}
     - Class: 114
-      Script: {instanceID: 4882}
+      Script: {instanceID: 4328}
     - Class: 114
-      Script: {instanceID: 4920}
+      Script: {instanceID: 4492}
     - Class: 114
-      Script: {instanceID: 5002}
+      Script: {instanceID: 4618}
     - Class: 114
-      Script: {instanceID: 5086}
+      Script: {instanceID: 4732}
     - Class: 114
-      Script: {instanceID: 5268}
+      Script: {instanceID: 4898}
     - Class: 114
-      Script: {instanceID: 5362}
+      Script: {instanceID: 4936}
     - Class: 114
-      Script: {instanceID: 5698}
+      Script: {instanceID: 5018}
     - Class: 114
-      Script: {instanceID: 5774}
+      Script: {instanceID: 5102}
     - Class: 114
-      Script: {instanceID: 6610}
+      Script: {instanceID: 5284}
     - Class: 114
-      Script: {instanceID: 6792}
+      Script: {instanceID: 5378}
     - Class: 114
-      Script: {instanceID: 6918}
+      Script: {instanceID: 5714}
     - Class: 114
-      Script: {instanceID: 7204}
+      Script: {instanceID: 5790}
     - Class: 114
-      Script: {instanceID: 7408}
+      Script: {instanceID: 6628}
     - Class: 114
-      Script: {instanceID: 8104}
+      Script: {instanceID: 6680}
     - Class: 114
-      Script: {instanceID: 8244}
+      Script: {instanceID: 6810}
     - Class: 114
-      Script: {instanceID: 9002}
+      Script: {instanceID: 6936}
     - Class: 114
-      Script: {instanceID: 9132}
+      Script: {instanceID: 7080}
     - Class: 114
-      Script: {instanceID: 26160}
+      Script: {instanceID: 7222}
     - Class: 114
-      Script: {instanceID: 27098}
+      Script: {instanceID: 7426}
+    - Class: 114
+      Script: {instanceID: 7654}
+    - Class: 114
+      Script: {instanceID: 8124}
+    - Class: 114
+      Script: {instanceID: 8264}
+    - Class: 114
+      Script: {instanceID: 9022}
+    - Class: 114
+      Script: {instanceID: 9152}
+    - Class: 114
+      Script: {instanceID: 29296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -236,17 +263,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
-    - Class: 258
-      Script: {instanceID: 0}
-    - Class: 850595691
-      Script: {instanceID: 0}
   scriptHashData:
-  - hash:
-      serializedVersion: 2
-      Hash: b8b34ea2c15d0a8588f36e9b18ba5504
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Pices
   - hash:
       serializedVersion: 2
       Hash: d41ab9b5ea92474f9c0a6937a0607ce1
@@ -273,6 +290,12 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
+      Hash: 8c88dc077914aec8cda702e48eeae0c0
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: SceneLoader
+  - hash:
+      serializedVersion: 2
       Hash: f45600bcc886206dd55a3208474aad61
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -283,6 +306,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline
     namespaceName: UnityEngine.Timeline
     className: SignalAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 577d2fed3f9d7971480551ae6d41338a
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: BallManagement
   - hash:
       serializedVersion: 2
       Hash: 8dff8e9853297d341afa0c11f9091b59
@@ -355,6 +384,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: SimpleScript
+  - hash:
+      serializedVersion: 2
+      Hash: 22c5450a1ac58cf87436a12e60d61650
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: SendMesaje
   - hash:
       serializedVersion: 2
       Hash: 67bc5e44b4935b89a85c407ac4e7dd6c
@@ -447,6 +482,12 @@ ScriptsOnlyBuild:
     className: DestroyAfterDelay
   - hash:
       serializedVersion: 2
+      Hash: 7050780ed031f7e8035f63242d2698a0
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PlayerEmpty
+  - hash:
+      serializedVersion: 2
       Hash: 72dc4f88c0c8bb4f0004bfaee2d50dfa
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Component.Transforming.Editing
@@ -469,6 +510,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: VectorSender
+  - hash:
+      serializedVersion: 2
+      Hash: 1f9cd9d0abfafd2a028a975569a64828
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: XOManager
   - hash:
       serializedVersion: 2
       Hash: 51d474ab212336a6821377d08141427f
@@ -523,6 +570,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: b8b34ea2c15d0a8588f36e9b18ba5504
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Pices
   - hash:
       serializedVersion: 2
       Hash: ed8bac09ffacadca9994789e381c69ce
@@ -603,6 +656,12 @@ ScriptsOnlyBuild:
     className: ClientManagerEditor
   - hash:
       serializedVersion: 2
+      Hash: 7edeba2f0f450c84bec408af020f79dc
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Send
+  - hash:
+      serializedVersion: 2
       Hash: 61857a432650461ea03aa4b07b7007db
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Managing.Predicting
@@ -613,6 +672,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnDropdownValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 2ae50a910598bafb25bb3544f1a46fd9
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Nert
   - hash:
       serializedVersion: 2
       Hash: 1d830bc5cfaaf24301dffea2877f4bea
@@ -709,6 +774,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: VariablesAsset
+  - hash:
+      serializedVersion: 2
+      Hash: a0d3186d1c02e5fb595a98cf6aeb9da4
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: ListTiles
   - hash:
       serializedVersion: 2
       Hash: 5838ec6bd094b15476cc62b54a58cf46
@@ -1287,6 +1358,12 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
+      Hash: be49e4b49414e948087e2d8364d28fbb
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Network
+  - hash:
+      serializedVersion: 2
       Hash: a6d4e8c3918a88341f96848d0091dab8
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Component.Prediction
@@ -1627,6 +1704,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnCollisionExitMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: e0e6a9f9e1b96dc2dccff9466c4bcfc6
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PlayerManager
   - hash:
       serializedVersion: 2
       Hash: d2ecd94550edf1b56aff07b1f4e41c57
@@ -2013,29 +2096,11 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: be49e4b49414e948087e2d8364d28fbb
+      Hash: 93982daf796521f9d84dcd541185e532
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: Network
-  - hash:
-      serializedVersion: 2
-      Hash: 2ae50a910598bafb25bb3544f1a46fd9
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Nert
-  - hash:
-      serializedVersion: 2
-      Hash: 22c5450a1ac58cf87436a12e60d61650
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: SendMesaje
-  - hash:
-      serializedVersion: 2
-      Hash: 7edeba2f0f450c84bec408af020f79dc
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Send
+    className: Test
   platform: 19
   scenePathNames:
-  - Assets/Scenes/Online Games/MainGame.unity
+  - Assets/Scenes/Online Games/X0-Online.unity
   playerPath: C:/Users/sumur/Desktop/Build/Board Breakers.exe
