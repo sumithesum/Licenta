@@ -122,6 +122,8 @@
 -define:FISHNET
 -define:FISHNET_V4
 -define:STEAMWORKS_NET
+-define:STEAMWORKSNET
+-define:HE_SYSCORE
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"Assets/FishNet/Runtime/Plugins/CodeAnalysis/FishNet.CodeAnalysis.dll"
@@ -343,6 +345,8 @@
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll"
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.4/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/com.rlabrecque.steamworks.net.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Heathen.Core.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
