@@ -8,12 +8,13 @@ ScriptsOnlyBuild:
     - VectorSender
     - XOManager
     Assembly-CSharp.dll:
+    - BootstrapManager
     - CameraManager
-    - ListTiles
+    - FishySteamworks.FishySteamworks
+    - MainMenuManager
     - OnlineSend
     - PlayerEmpty
     - PlayerManager
-    - Test
     - VectorSender
     - XOManager
     FishNet.Demos.dll:
@@ -26,7 +27,6 @@ ScriptsOnlyBuild:
     - FishNet.Example.ColliderRollbacks.Aim
     - FishNet.Example.ColliderRollbacks.Fire
     - FishNet.Example.ColliderRollbacks.PlayerMotor
-    - FishNet.Example.NetworkHudCanvases
     - FishNet.Example.Scened.PlayerController
     FishNet.Runtime:
     - FishNet.Object.NetworkObject
@@ -39,9 +39,16 @@ ScriptsOnlyBuild:
     - FishNet.Managing.NetworkManager
     - FishNet.Managing.Object.DefaultPrefabObjects
     - FishNet.Managing.Observing.ObserverManager
+    - FishNet.Managing.Transporting.TransportManager
     - FishNet.Object.EmptyNetworkBehaviour
     - FishNet.Object.NetworkObject
     - FishNet.Observing.NetworkObserver
+    Heathen.Steamworks.Editor.dll:
+    - HeathenEngineering.SteamworksIntegration.Editors.SteamContentBuilderConfig
+    - HeathenEngineering.SteamworksIntegration.Editors.SteamContentBuilderConfigEditor
+    Heathen.Steamworks.dll:
+    - HeathenEngineering.SteamworksIntegration.SteamSettings
+    - HeathenEngineering.SteamworksIntegration.SteamworksBehaviour
     Unity.PlasticSCM.Editor.dll:
     - Unity.PlasticSCM.Editor.PlasticWindow
     Unity.Rider.Editor.dll:
@@ -54,6 +61,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_StyleSheet
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
@@ -69,19 +77,26 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
-    - UnityEngine.UI.RawImage
+    - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.RectMask2D
   serializedClasses:
     FishNet.Runtime:
     - FishNet.Component.Transforming.Beta.InitializationSettings
     - FishNet.Component.Transforming.Beta.MovementSettings
     - FishNet.Component.Transforming.NetworkTransform/ComponentConfigurationType
     - FishNet.Component.Transforming.NetworkTransform/SnappedAxes
+    - FishNet.Managing.Transporting.LatencySimulator
     - FishNet.Object.NetworkObject/PredictionType
     - FishNet.Object.TransformProperties
     - FishNet.Serializing.TransformPackingData
     - FishNet.Utility.Template.TickNetworkBehaviour/TickCallback
     GameKit.Dependencies:
     - GameKit.Dependencies.Utilities.Types.FloatRange
+    Heathen.Core:
+    - HeathenEngineering.Events.UnityStringEvent
+    Heathen.Steamworks:
+    - HeathenEngineering.SteamworksIntegration.SteamSettings/GameClient
+    - HeathenEngineering.SteamworksIntegration.SteamSettings/GameServer
     Unity.TextMeshPro:
     - TMPro.FaceInfo_Legacy
     - TMPro.FontAssetCreationSettings
@@ -92,6 +107,11 @@ ScriptsOnlyBuild:
     - TMPro.TMP_GlyphAdjustmentRecord
     - TMPro.TMP_GlyphPairAdjustmentRecord
     - TMPro.TMP_GlyphValueRecord
+    - TMPro.TMP_InputField/OnChangeEvent
+    - TMPro.TMP_InputField/SelectionEvent
+    - TMPro.TMP_InputField/SubmitEvent
+    - TMPro.TMP_InputField/TextSelectionEvent
+    - TMPro.TMP_InputField/TouchScreenKeyboardEvent
     - TMPro.TMP_Sprite
     - TMPro.TMP_SpriteCharacter
     - TMPro.TMP_SpriteGlyph
@@ -101,6 +121,7 @@ ScriptsOnlyBuild:
     - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
     - UnityEngine.Events.PersistentListenerMode
+    - UnityEngine.Events.UnityEvent
     UnityEngine.TextCoreFontEngineModule:
     - UnityEngine.TextCore.FaceInfo
     - UnityEngine.TextCore.Glyph
@@ -113,12 +134,26 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
     - UnityEngine.UI.Navigation
     - UnityEngine.UI.SpriteState
+    com.rlabrecque.steamworks.net:
+    - Steamworks.AppId_t
   methodsToPreserve:
-  - assembly: FishNet.Demos
-    fullTypeName: FishNet.Example.NetworkHudCanvases
-    methodName: OnClick_Client
+  - assembly: Assembly-CSharp
+    fullTypeName: BootstrapManager
+    methodName: GoToMenu
+  - assembly: Assembly-CSharp
+    fullTypeName: MainMenuManager
+    methodName: leaveLobby
+  - assembly: Assembly-CSharp
+    fullTypeName: MainMenuManager
+    methodName: createLobby
+  - assembly: Assembly-CSharp
+    fullTypeName: MainMenuManager
+    methodName: leaveLobby
+  - assembly: Assembly-CSharp
+    fullTypeName: MainMenuManager
+    methodName: joinLobby
   sceneClasses:
-    Assets/Scenes/Online Games/X0-Online.unity:
+    Assets/Scenes/Bootstrap.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -154,89 +189,79 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1564}
+      Script: {instanceID: 1876}
     - Class: 114
-      Script: {instanceID: 1618}
+      Script: {instanceID: 1886}
     - Class: 114
-      Script: {instanceID: 1836}
+      Script: {instanceID: 2060}
     - Class: 114
-      Script: {instanceID: 1846}
+      Script: {instanceID: 2420}
     - Class: 114
-      Script: {instanceID: 2306}
+      Script: {instanceID: 2732}
     - Class: 114
-      Script: {instanceID: 2572}
+      Script: {instanceID: 2866}
     - Class: 114
-      Script: {instanceID: 2682}
+      Script: {instanceID: 2930}
     - Class: 114
-      Script: {instanceID: 2730}
+      Script: {instanceID: 3684}
     - Class: 114
-      Script: {instanceID: 2820}
+      Script: {instanceID: 3730}
     - Class: 114
-      Script: {instanceID: 3060}
+      Script: {instanceID: 4014}
     - Class: 114
-      Script: {instanceID: 3384}
+      Script: {instanceID: 4046}
     - Class: 114
-      Script: {instanceID: 3396}
+      Script: {instanceID: 4370}
     - Class: 114
-      Script: {instanceID: 3422}
+      Script: {instanceID: 4528}
     - Class: 114
-      Script: {instanceID: 3626}
+      Script: {instanceID: 4748}
     - Class: 114
-      Script: {instanceID: 3660}
+      Script: {instanceID: 4932}
     - Class: 114
-      Script: {instanceID: 3690}
+      Script: {instanceID: 5078}
     - Class: 114
-      Script: {instanceID: 4128}
+      Script: {instanceID: 5206}
     - Class: 114
-      Script: {instanceID: 4328}
+      Script: {instanceID: 5392}
     - Class: 114
-      Script: {instanceID: 4492}
+      Script: {instanceID: 5438}
     - Class: 114
-      Script: {instanceID: 4618}
+      Script: {instanceID: 5530}
     - Class: 114
-      Script: {instanceID: 4732}
+      Script: {instanceID: 5618}
     - Class: 114
-      Script: {instanceID: 4898}
+      Script: {instanceID: 5828}
     - Class: 114
-      Script: {instanceID: 4936}
+      Script: {instanceID: 5936}
     - Class: 114
-      Script: {instanceID: 5018}
+      Script: {instanceID: 6308}
     - Class: 114
-      Script: {instanceID: 5102}
+      Script: {instanceID: 6330}
     - Class: 114
-      Script: {instanceID: 5284}
+      Script: {instanceID: 6416}
     - Class: 114
-      Script: {instanceID: 5378}
+      Script: {instanceID: 7062}
     - Class: 114
-      Script: {instanceID: 5714}
+      Script: {instanceID: 7374}
     - Class: 114
-      Script: {instanceID: 5790}
+      Script: {instanceID: 7588}
     - Class: 114
-      Script: {instanceID: 6628}
+      Script: {instanceID: 7744}
     - Class: 114
-      Script: {instanceID: 6680}
+      Script: {instanceID: 8072}
     - Class: 114
-      Script: {instanceID: 6810}
+      Script: {instanceID: 8270}
     - Class: 114
-      Script: {instanceID: 6936}
+      Script: {instanceID: 8314}
     - Class: 114
-      Script: {instanceID: 7080}
+      Script: {instanceID: 8588}
     - Class: 114
-      Script: {instanceID: 7222}
+      Script: {instanceID: 9144}
     - Class: 114
-      Script: {instanceID: 7426}
+      Script: {instanceID: 9310}
     - Class: 114
-      Script: {instanceID: 7654}
-    - Class: 114
-      Script: {instanceID: 8124}
-    - Class: 114
-      Script: {instanceID: 8264}
-    - Class: 114
-      Script: {instanceID: 9022}
-    - Class: 114
-      Script: {instanceID: 9152}
-    - Class: 114
-      Script: {instanceID: 29296}
+      Script: {instanceID: 10392}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -257,6 +282,61 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
+    Assets/Scenes/MainMenu.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1566}
+    - Class: 114
+      Script: {instanceID: 1624}
+    - Class: 114
+      Script: {instanceID: 1776}
+    - Class: 114
+      Script: {instanceID: 3038}
+    - Class: 114
+      Script: {instanceID: 3314}
+    - Class: 114
+      Script: {instanceID: 3706}
+    - Class: 114
+      Script: {instanceID: 5058}
+    - Class: 114
+      Script: {instanceID: 6146}
+    - Class: 114
+      Script: {instanceID: 6416}
+    - Class: 114
+      Script: {instanceID: 7294}
+    - Class: 114
+      Script: {instanceID: 7438}
+    - Class: 114
+      Script: {instanceID: 7908}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
     - Class: 223
@@ -264,6 +344,12 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: b8b34ea2c15d0a8588f36e9b18ba5504
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Pices
   - hash:
       serializedVersion: 2
       Hash: d41ab9b5ea92474f9c0a6937a0607ce1
@@ -296,6 +382,12 @@ ScriptsOnlyBuild:
     className: SceneLoader
   - hash:
       serializedVersion: 2
+      Hash: 9eefee624a6161a32cb08193cd6c864a
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: StringChangeEvent
+  - hash:
+      serializedVersion: 2
       Hash: f45600bcc886206dd55a3208474aad61
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -320,16 +412,34 @@ ScriptsOnlyBuild:
     className: LayoutElement
   - hash:
       serializedVersion: 2
+      Hash: 12024b8004a66e9c8943df2f8f164d62
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: CameraPointerListVariable
+  - hash:
+      serializedVersion: 2
       Hash: e39b696af0974c9220ead54cddf50097
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Example.IntermediateLayers
     className: IntermediateLayerCipher
   - hash:
       serializedVersion: 2
+      Hash: f047032636b0877f6214a8bf0bde2880
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: SpritePointerVariable
+  - hash:
+      serializedVersion: 2
       Hash: 00bbd9db8634496d079d17711b2ff7c4
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: Selectable
+  - hash:
+      serializedVersion: 2
+      Hash: 8c23f208dd27f17680d6de19906356d1
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: DoubleChangeEvent
   - hash:
       serializedVersion: 2
       Hash: d0caa48b5fe6778ce3f0de7aec45c4e6
@@ -368,6 +478,24 @@ ScriptsOnlyBuild:
     className: PingDisplay
   - hash:
       serializedVersion: 2
+      Hash: bff3348f505a22f1fd96a38c45d427f8
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector3Variable
+  - hash:
+      serializedVersion: 2
+      Hash: 7468e6901826e523faa884ff5ea0ecc3
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: ColorChangeEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 451836c9cc747957f4d72f0495a14f6d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: TriggerStaySender
+  - hash:
+      serializedVersion: 2
       Hash: 4274fcfeed011a0ec501fa74f91ea8a0
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Managing.Editing
@@ -386,10 +514,52 @@ ScriptsOnlyBuild:
     className: SimpleScript
   - hash:
       serializedVersion: 2
+      Hash: 9f52937926d7c15be27eaf410bf7dd97
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: BoolGameEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 3a68ef03f6da457bcaba78cdfd2277fa
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: FriendGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 3c96f9182a8abb54df4d4d35dfdd66f3
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: SteamworksBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 6bad85a10453ab034576b72d10edc5ec
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: OverlayManager
+  - hash:
+      serializedVersion: 2
+      Hash: 93982daf796521f9d84dcd541185e532
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Test
+  - hash:
+      serializedVersion: 2
+      Hash: 6660afa1810958ae130ef8b67277d3b4
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float2ChangeEvent
+  - hash:
+      serializedVersion: 2
       Hash: 22c5450a1ac58cf87436a12e60d61650
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: SendMesaje
+  - hash:
+      serializedVersion: 2
+      Hash: 8e2d93de692b1c278a24aac4373172f3
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: GameObjectPointerListVariable
   - hash:
       serializedVersion: 2
       Hash: 67bc5e44b4935b89a85c407ac4e7dd6c
@@ -398,10 +568,28 @@ ScriptsOnlyBuild:
     className: ResizableContainer
   - hash:
       serializedVersion: 2
+      Hash: 6bf1cdf2f74715d36f1cd5b294e3666e
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector2IntListVariable
+  - hash:
+      serializedVersion: 2
       Hash: 3dc67d83830031fcaa68434177ecc1bf
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Transporting.Yak
     className: Yak
+  - hash:
+      serializedVersion: 2
+      Hash: 5d31354de163b6fb6c50ab5321326b3f
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: FloatListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 92192eb590b2a8ea775c6234faf4fa96
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: StringGameEvent
   - hash:
       serializedVersion: 2
       Hash: b12640dfdb5966813e9dd838893e6c4a
@@ -426,6 +614,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: 30531ae7a827d6681d702e9d1b41e357
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: IntStatObject
   - hash:
       serializedVersion: 2
       Hash: ad49e20f31ed572e586aa8bbaafb591b
@@ -464,10 +658,22 @@ ScriptsOnlyBuild:
     className: UnityOnJointBreakMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 1f78540fc23e9e192972497632571060
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Vector2ChangeEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 00fac2115f214d931c0c71bcd12b75b8
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Demo.Prediction.CharacterControllers
     className: MovingPlatform
+  - hash:
+      serializedVersion: 2
+      Hash: b4b3504e84d0c8e6a4e3e771cb1e3ccc
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: TransformPointerVariable
   - hash:
       serializedVersion: 2
       Hash: 1ab136900c0edaeeb49424c852595030
@@ -482,10 +688,52 @@ ScriptsOnlyBuild:
     className: DestroyAfterDelay
   - hash:
       serializedVersion: 2
+      Hash: 9fbceb8499dda1eeedeb6295b6dcdf82
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: ComponentPointerVariable
+  - hash:
+      serializedVersion: 2
+      Hash: a99d226a67be98a8efb6ba269adc3441
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: ColliderGameEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 25f656e6f3306e85bc99f37d1a19129f
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: SteamGameServerEvents
+  - hash:
+      serializedVersion: 2
+      Hash: f757cfa509eaece7a9816548f2ad26b6
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetUserIdInputField
+  - hash:
+      serializedVersion: 2
+      Hash: a111838a85aaffbb92994a5188169173
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Int3GameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 7050780ed031f7e8035f63242d2698a0
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: PlayerEmpty
+  - hash:
+      serializedVersion: 2
+      Hash: b921e3348701195db4de2d9e80fb2f2a
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedIntGameEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: a04b09c6c96834a9125d461f4fffa7c4
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: CanvasPointerListVariable
   - hash:
       serializedVersion: 2
       Hash: 72dc4f88c0c8bb4f0004bfaee2d50dfa
@@ -500,6 +748,12 @@ ScriptsOnlyBuild:
     className: SceneUnloaderExample
   - hash:
       serializedVersion: 2
+      Hash: d847687248e64abb9aba54ab2c5cba9b
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: IntGameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 1321993db8249e1e05e1e0492b2bbdc3
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -512,6 +766,24 @@ ScriptsOnlyBuild:
     className: VectorSender
   - hash:
       serializedVersion: 2
+      Hash: 415b9d5a70b93772ee4db43e9b64c9c7
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: QuaternionChangeEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: ddf3d63546e42abb4ac39f15e2683384
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: LongListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: f23f2a2ad31c09d9f0262ff0cc664117
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: StringGameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 1f9cd9d0abfafd2a028a975569a64828
     assemblyName: Assembly-CSharp
     namespaceName: 
@@ -522,6 +794,12 @@ ScriptsOnlyBuild:
     assemblyName: GameKit.Dependencies
     namespaceName: GameKit.Dependencies.Utilities.ObjectPooling.Examples
     className: ProjectileSpawner
+  - hash:
+      serializedVersion: 2
+      Hash: aa7a644aebb66a2b966c502d0fcb6cf5
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float2GameEvent
   - hash:
       serializedVersion: 2
       Hash: c9b1ea3bf987a2e780a24849503ca72e
@@ -548,16 +826,16 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
-      Hash: 04b6685b6f724c0d6024e6b6f96c8202
-    assemblyName: Unity.Timeline
-    namespaceName: UnityEngine.Timeline
-    className: TimelineAsset
-  - hash:
-      serializedVersion: 2
       Hash: ada873da50974d1e7ce247ffb296b0f3
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnCollisionEnterMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: a9595e801c4f79624d3f9a210d29f4d4
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float3GameEvent
   - hash:
       serializedVersion: 2
       Hash: 1b97e4370b952e31e75b18da18ace4c7
@@ -572,16 +850,28 @@ ScriptsOnlyBuild:
     className: UnityMessageListener
   - hash:
       serializedVersion: 2
-      Hash: b8b34ea2c15d0a8588f36e9b18ba5504
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Pices
-  - hash:
-      serializedVersion: 2
       Hash: ed8bac09ffacadca9994789e381c69ce
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: TMP_TextSelector_A
+  - hash:
+      serializedVersion: 2
+      Hash: 03562b41662b4ac3950e8fa22ec17d2e
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetAchievementName
+  - hash:
+      serializedVersion: 2
+      Hash: 4773991192a82aaac45904d407cf2c02
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: RectTransformPointerVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 1fb48a14718e40a2cd0f1f2364e2a3ad
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: UGUISetUserName
   - hash:
       serializedVersion: 2
       Hash: fce9b835d1e8b08e7ecea8da19f21986
@@ -600,6 +890,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner
     namespaceName: UnityEngine.TestRunner.Utils
     className: TestRunCallbackListener
+  - hash:
+      serializedVersion: 2
+      Hash: 23359d04f1a684ad14b843429de5cb4b
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: StringVariable
   - hash:
       serializedVersion: 2
       Hash: 5a4aa2850fe11587f47e34c270c7fd22
@@ -644,16 +940,22 @@ ScriptsOnlyBuild:
     className: UnityOnInputFieldEndEditMessageListener
   - hash:
       serializedVersion: 2
+      Hash: f604c8bbe10fa34a4e9b5697286d9e04
+    assemblyName: FishNet.Runtime
+    namespaceName: FishNet.Managing.Client.Editing
+    className: ClientManagerEditor
+  - hash:
+      serializedVersion: 2
       Hash: bf40c7a9dc15bc219687c9838aa9b41f
     assemblyName: UnityEngine.TestRunner
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: f604c8bbe10fa34a4e9b5697286d9e04
-    assemblyName: FishNet.Runtime
-    namespaceName: FishNet.Managing.Client.Editing
-    className: ClientManagerEditor
+      Hash: 8882e91e9c2ad4617a478f16da53641f
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: HeathenUIBehaviour
   - hash:
       serializedVersion: 2
       Hash: 7edeba2f0f450c84bec408af020f79dc
@@ -668,10 +970,34 @@ ScriptsOnlyBuild:
     className: PredictionManager
   - hash:
       serializedVersion: 2
+      Hash: 336ae1e1d108fe8328ffb809d93fb529
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedLongGameEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 30a9feaeb7fc8d1b357a4561366ee305
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: BoolVariable
+  - hash:
+      serializedVersion: 2
       Hash: b98001682cba83786775c9e415b89a61
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnDropdownValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 08c24f5e03bb6aa7570fcaae0782cdbd
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: HeathenBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 855bb3419890c5153b447024b0494539
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: BasicFriendInviteButton
   - hash:
       serializedVersion: 2
       Hash: 2ae50a910598bafb25bb3544f1a46fd9
@@ -692,22 +1018,28 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
+      Hash: f3d82398e4279229bfd93d105a470262
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.UX
+    className: ScriptableTag
+  - hash:
+      serializedVersion: 2
       Hash: bf2a6c2639a02c6341389a8f9b7dc3c7
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Demo.HashGrid
     className: MoveRandomly
   - hash:
       serializedVersion: 2
-      Hash: 915204dac8acad99f076d6e72ada0a0f
-    assemblyName: UnityEngine.UI
-    namespaceName: UnityEngine.UI
-    className: Button
-  - hash:
-      serializedVersion: 2
       Hash: 593a641cd7822a10b9a54aa9eb5c3d5e
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: Benchmark04
+  - hash:
+      serializedVersion: 2
+      Hash: 915204dac8acad99f076d6e72ada0a0f
+    assemblyName: UnityEngine.UI
+    namespaceName: UnityEngine.UI
+    className: Button
   - hash:
       serializedVersion: 2
       Hash: e4127c552bbb6a89fafee28002e9a5d0
@@ -728,6 +1060,12 @@ ScriptsOnlyBuild:
     className: UnityOnInputFieldValueChangedMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 06e25674704556b5f0d740b07269abbd
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: GameEvent
+  - hash:
+      serializedVersion: 2
       Hash: bb8d968ef4474e71aaad4a4dce279f90
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -738,6 +1076,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnMouseDragMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 6c2f5cb441bff36476e2c5432b184b23
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float3ChangeEvent
   - hash:
       serializedVersion: 2
       Hash: d7c8092511063e0dae8106bfc8ed63dd
@@ -770,6 +1114,18 @@ ScriptsOnlyBuild:
     className: DetachableNetworkTickSmoother
   - hash:
       serializedVersion: 2
+      Hash: b171865dfd6f9746ec142b1e8cbed88e
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Int2GameEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 9273d1259513cd4ba40f359ebdbf5d53
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: UnsignedIntListVariable
+  - hash:
+      serializedVersion: 2
       Hash: c6369b4cc3be620d6c9300e920bc3d52
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -780,6 +1136,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: ListTiles
+  - hash:
+      serializedVersion: 2
+      Hash: fe86edee29fe55602e7868febbcd67ff
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: QuaternionChangeEvent
   - hash:
       serializedVersion: 2
       Hash: 5838ec6bd094b15476cc62b54a58cf46
@@ -860,22 +1222,34 @@ ScriptsOnlyBuild:
     className: UnityOnControllerColliderHitMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 1e5de9b1d1a4d2a3891580cf784d97f8
-    assemblyName: FishNet.Runtime
-    namespaceName: FishNet.Component.Utility
-    className: BandwidthDisplay
-  - hash:
-      serializedVersion: 2
       Hash: 6229bbf2b5215a831420b770cfad79d9
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Managing.Observing.Editing
     className: ObserverManagerEditor
   - hash:
       serializedVersion: 2
+      Hash: 1e5de9b1d1a4d2a3891580cf784d97f8
+    assemblyName: FishNet.Runtime
+    namespaceName: FishNet.Component.Utility
+    className: BandwidthDisplay
+  - hash:
+      serializedVersion: 2
+      Hash: 39ae1ee8c12cf16bcbc2ff217e5e746c
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: AnimationCurveVariable
+  - hash:
+      serializedVersion: 2
       Hash: 960935b102b3064f4b924de16426e340
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TextMeshPro
+  - hash:
+      serializedVersion: 2
+      Hash: c9919cded681ca732c90107344947120
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: CollisionGameEventListener
   - hash:
       serializedVersion: 2
       Hash: b2d2a01a2a85d9ed12e80cb33a9a6044
@@ -890,10 +1264,22 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionExit2DMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 11b29f8ba6ee79ddd62272bda04c81a4
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: SteamSettings
+  - hash:
+      serializedVersion: 2
       Hash: 6d588ab10408d1d1a516a0bcb89fdcc0
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Transporting
     className: NetworkWriterLoop
+  - hash:
+      serializedVersion: 2
+      Hash: 480efb384238ffd7143813fc8e2d18a3
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: ImageTypePointerVariable
   - hash:
       serializedVersion: 2
       Hash: 934db60b7e4a413f94c88386f887a89d
@@ -932,10 +1318,22 @@ ScriptsOnlyBuild:
     className: ServerScenePrewarmer
   - hash:
       serializedVersion: 2
+      Hash: 93cb2271f9f0607498d6da30e5a6742e
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: CollisionGameEvent
+  - hash:
+      serializedVersion: 2
       Hash: 552dca338f20933ce362ebbe559a6aa6
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnPointerExitMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 4d3f9eec5ad62121476a6a416667eff6
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetAchievementDescription
   - hash:
       serializedVersion: 2
       Hash: 539ecdba17de87bbfc3e50cc5895cb47
@@ -962,6 +1360,12 @@ ScriptsOnlyBuild:
     className: OnlineSend
   - hash:
       serializedVersion: 2
+      Hash: 22d5a3ffdb6698c6cf28ad342213f2d6
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Int4GameEvent
+  - hash:
+      serializedVersion: 2
       Hash: 665da785348a8806bf1524fe10742a60
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
@@ -980,10 +1384,34 @@ ScriptsOnlyBuild:
     className: OfflineTickSmoother
   - hash:
       serializedVersion: 2
+      Hash: 7085de32035b1949075cb212d73bb081
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: FriendList
+  - hash:
+      serializedVersion: 2
       Hash: d940da845f7d0c0751cd4120a985f09d
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Object.Editing
     className: NetworkObjectEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 4512ca29ca2029cf9124aa891b991d45
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: BoolChangeEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 75d2b248d3c5f7b25138f3df3edbd591
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector4Variable
+  - hash:
+      serializedVersion: 2
+      Hash: 97972c27f7c586c4429ed3761929c645
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: TransformPointerListVariable
   - hash:
       serializedVersion: 2
       Hash: 4718916586b3818eb69bf65df61f0f3a
@@ -1002,6 +1430,30 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline
     namespaceName: UnityEngine.Timeline
     className: SignalReceiver
+  - hash:
+      serializedVersion: 2
+      Hash: be74b65567da98493438533d1c2515c7
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: AchievementObject
+  - hash:
+      serializedVersion: 2
+      Hash: 7c6bd0c966038a12722e57c8f07e4349
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: CollisionExitSender
+  - hash:
+      serializedVersion: 2
+      Hash: cd07fc43d4a030c63895357e503200de
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: IntListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 02ba997a4b6949b038b5af9f6b4587c6
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Vector3ChangeEventListener
   - hash:
       serializedVersion: 2
       Hash: c78ed13f6b5a632d70d4f73f56ad81f2
@@ -1046,6 +1498,12 @@ ScriptsOnlyBuild:
     className: DebugManager
   - hash:
       serializedVersion: 2
+      Hash: 679461373dd8094c93248f40038aff5c
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: IntChangeEvent
+  - hash:
+      serializedVersion: 2
       Hash: ca7965796a6fc0e5baad4cb19f5b5ded
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1062,6 +1520,12 @@ ScriptsOnlyBuild:
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Managing.Logging
     className: LevelLoggingConfiguration
+  - hash:
+      serializedVersion: 2
+      Hash: 64b609dd783d845b31cfcd71ee1a0d55
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedIntChangeEvent
   - hash:
       serializedVersion: 2
       Hash: c7e9000ae0cbd7034e0fefc2356c7991
@@ -1082,10 +1546,28 @@ ScriptsOnlyBuild:
     className: NetworkTickSmoother
   - hash:
       serializedVersion: 2
+      Hash: 49ab030b7197364033fdd15e685e7d39
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: ImageFillMethodPointerVariable
+  - hash:
+      serializedVersion: 2
       Hash: 6dd8ae67dfe07e94ae3a34401f0ea1db
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Transporting.Tugboat.Editing
     className: TugboatEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 41355bab5f2046b13e1cde8371660ecf
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float3GameEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 5ce06b5036449a3f9ae08fcf78ca153d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: BoolChangeEvent
   - hash:
       serializedVersion: 2
       Hash: e7e95903ca66d58e1a7cbd71f824e16d
@@ -1112,10 +1594,22 @@ ScriptsOnlyBuild:
     className: StructSyncBehaviour
   - hash:
       serializedVersion: 2
+      Hash: 226f6c8a0334ff66bc5da5b3b8fc8bce
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedIntChangeEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 9078325c2a6f6a2d9612ade897511860
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_SpriteAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 9359b5c545756a3069d1d0ee44e7e73f
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: FloatChangeEventListener
   - hash:
       serializedVersion: 2
       Hash: 96e7bcfd2d072992dab64ac44058b930
@@ -1148,10 +1642,22 @@ ScriptsOnlyBuild:
     className: TMP_ExampleScript_01
   - hash:
       serializedVersion: 2
+      Hash: 73ba891d547595443d677ebc58e0ad0b
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: MaterialPointerVariable
+  - hash:
+      serializedVersion: 2
       Hash: dc31d211c7459841fe4f406ae2e51480
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: TextConsoleSimulator
+  - hash:
+      serializedVersion: 2
+      Hash: 6a939887b58c07a671accc6a336af871
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: IntChangeEventListener
   - hash:
       serializedVersion: 2
       Hash: 143e9f4cf5b1173078384912df19f81d
@@ -1184,6 +1690,18 @@ ScriptsOnlyBuild:
     className: UnityOnPointerClickMessageListener
   - hash:
       serializedVersion: 2
+      Hash: f60c4a636ae72990c88d8ed346f12315
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Int4GameEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 5d33cf0cf3cc9cc1b5305186818d19ed
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: IntVariable
+  - hash:
+      serializedVersion: 2
       Hash: d1fc31d7b964abcabee29fae3d20fe5c
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Demo.Benchmarks.NetworkTransforms
@@ -1208,10 +1726,22 @@ ScriptsOnlyBuild:
     className: PrefabSpawner
   - hash:
       serializedVersion: 2
+      Hash: a8dea04cd02dc9476527d08237fb9562
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: UnsignedIntVariable
+  - hash:
+      serializedVersion: 2
       Hash: 0b63f6d3335e11939ce8790b904c8691
     assemblyName: Unity.Timeline
     namespaceName: UnityEngine.Timeline
     className: ActivationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: a0abb8f6f036a78da654b6465576de0d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: IntGameEvent
   - hash:
       serializedVersion: 2
       Hash: 936902165881af87ff612480ae8196c6
@@ -1242,6 +1772,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: TMP_TextEventCheck
+  - hash:
+      serializedVersion: 2
+      Hash: 004b93b5499e5392bbb8469e09f6c43d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: ColorListVariable
   - hash:
       serializedVersion: 2
       Hash: f2098fcd8ee983a05ec192f63904298f
@@ -1280,6 +1816,12 @@ ScriptsOnlyBuild:
     className: ServerSpawner
   - hash:
       serializedVersion: 2
+      Hash: 666221d02e19b1baef4a4037a2dadb9d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: BoolGameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 47ee34eb8b6021efa0289dbbb17a5a85
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
@@ -1298,6 +1840,12 @@ ScriptsOnlyBuild:
     className: ShaderPropAnimator
   - hash:
       serializedVersion: 2
+      Hash: 0352c29bc0266dfb234cb6029cc91bd7
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: FloatGameEvent
+  - hash:
+      serializedVersion: 2
       Hash: 14a7a9f0a60e7336f2e8bcec4f7573a0
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Managing.Timing.Editing
@@ -1314,6 +1862,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: GlobalMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 1e4fcf4bd567f75efce7b0f9b6b017ef
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: BootstrapManager
   - hash:
       serializedVersion: 2
       Hash: 53e329840e6d03aebec76623c3b054db
@@ -1352,6 +1906,12 @@ ScriptsOnlyBuild:
     className: WarpTextExample
   - hash:
       serializedVersion: 2
+      Hash: eac15dabe0d04cf1377759301f27e6f9
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: GameObjectPointerVariable
+  - hash:
+      serializedVersion: 2
       Hash: 17f82e3e7d8f8b07a270a4aad9bfe79d
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
@@ -1382,6 +1942,12 @@ ScriptsOnlyBuild:
     className: TMP_DigitValidator
   - hash:
       serializedVersion: 2
+      Hash: 608887beaae4c5cb590c6449315b4be4
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float4GameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 8d6a9285db54f810c5246c7bc47b34d6
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Demo.AdditiveScenes
@@ -1394,6 +1960,12 @@ ScriptsOnlyBuild:
     className: UnityOnBecameInvisibleMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 3e99c92f9e8790bf837ba3ecb89509c0
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Int3GameEvent
+  - hash:
+      serializedVersion: 2
       Hash: 5874b789cd9832847c61ebfa803213af
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UIElements
@@ -1404,6 +1976,12 @@ ScriptsOnlyBuild:
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Component.Transforming.Editing
     className: DetachableNetworkTickSmootherEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 94dde34f18ed0fb06b94b106da9b9962
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: RectTransformListVariable
   - hash:
       serializedVersion: 2
       Hash: e6636e0523515ddeb6b2db241aad3bfb
@@ -1422,6 +2000,12 @@ ScriptsOnlyBuild:
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Component.Observing
     className: HashGrid
+  - hash:
+      serializedVersion: 2
+      Hash: d54eb3790162f7202e09a4b8e65c89ce
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: RichPresenceReader
   - hash:
       serializedVersion: 2
       Hash: 9dd54ce33440072d6692a67e0c384ad1
@@ -1454,10 +2038,22 @@ ScriptsOnlyBuild:
     className: CanvasGroupFader
   - hash:
       serializedVersion: 2
+      Hash: 1176df5d7bbec1a39feb5e2a7c1bc469
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: RectTransformVariable
+  - hash:
+      serializedVersion: 2
       Hash: 2b4b65331eef11325c1175981ea00ed5
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Transporting.Tugboat
     className: Tugboat
+  - hash:
+      serializedVersion: 2
+      Hash: a333c9d01168168c3947864511cbd06d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: TriggerEnterSender
   - hash:
       serializedVersion: 2
       Hash: 1ce63d97d1ca25cba2d91d5f32fd5f79
@@ -1466,10 +2062,40 @@ ScriptsOnlyBuild:
     className: StateGraphAsset
   - hash:
       serializedVersion: 2
+      Hash: 4416c60cffcf395f16715678342a4a66
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: QuaternionVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 5937ab397505c5f3d62be224d409a744
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: CollisionEnterSender
+  - hash:
+      serializedVersion: 2
+      Hash: 8d861e128b74d856858f709d60583a03
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: FloatVariable
+  - hash:
+      serializedVersion: 2
       Hash: 0f7e2f71e207e1dbf053cbc4a5e64b37
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Example.Authenticating
     className: PasswordAuthenticator
+  - hash:
+      serializedVersion: 2
+      Hash: 9a30251b3e33fe234c67cba6e328cbb9
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedLongChangeEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 345577170510126852dc83ea390e3946
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector2Variable
   - hash:
       serializedVersion: 2
       Hash: f709a1d6a2ed1ee383ad8888988c3995
@@ -1490,6 +2116,24 @@ ScriptsOnlyBuild:
     className: Benchmark02
   - hash:
       serializedVersion: 2
+      Hash: 8122d0eaca5d9e245675bddd6240f7e5
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: LongGameEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 851f853a3fe6e793a6bc3136a0204492
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: FloatChangeEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 6388a11f339c77caf7673917fccd4f38
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float2GameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: aba6c5a6b60f3c886a698160bcefd2f2
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Component.Observing
@@ -1508,10 +2152,28 @@ ScriptsOnlyBuild:
     className: CreateNewNetworkBehaviour
   - hash:
       serializedVersion: 2
+      Hash: 9c607e5a56777332e921b3ac6ab9a595
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: ComponentPointerListVariable
+  - hash:
+      serializedVersion: 2
       Hash: 4166580c620718548959a77fa7b43fc1
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: TextMeshSpawner
+  - hash:
+      serializedVersion: 2
+      Hash: 4d0e5c8f89cb754d97d66df303fe9e91
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: MainMenuManager
+  - hash:
+      serializedVersion: 2
+      Hash: 2b95506cfdb81dc8bc6be121c94c7e18
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: RectTransformChangeEventListener
   - hash:
       serializedVersion: 2
       Hash: ef38c1407dba8c1f5d69f5db61a694fe
@@ -1526,10 +2188,34 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
+      Hash: cf8109429acdd03639cea64755982023
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: StringFieldManager
+  - hash:
+      serializedVersion: 2
       Hash: 4f525157091dc4ff85010856fed5f76a
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Example.ColliderRollbacks
     className: Fire
+  - hash:
+      serializedVersion: 2
+      Hash: e016885158bb6d1e1a620a498be6fffd
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Vector2IntChangeEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 5596c1efdfee71a36824530a3d011c75
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedIntGameEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 5f2f7058c5c2f75dca40e949f32d5602
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: ColliderGameEvent
   - hash:
       serializedVersion: 2
       Hash: 9637dcdf3068a91dfe653e61bb82f13d
@@ -1544,10 +2230,22 @@ ScriptsOnlyBuild:
     className: ObjectPool
   - hash:
       serializedVersion: 2
+      Hash: 106460c012ca1eb53a14aa90dca48ab1
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: RichPresenceSetter
+  - hash:
+      serializedVersion: 2
       Hash: 29ba5c6089db31ba320f8dac70f6a812
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Component.Spawning
     className: PlayerSpawner
+  - hash:
+      serializedVersion: 2
+      Hash: a90a860eb6f2ed68366952a6bcc0af25
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: ColorVariable
   - hash:
       serializedVersion: 2
       Hash: 015113fbab35c4b0c394e4ff68f229ae
@@ -1556,10 +2254,22 @@ ScriptsOnlyBuild:
     className: DDOL
   - hash:
       serializedVersion: 2
+      Hash: e73a5e1807faabd15fa3ada85bc88d5c
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: ToggleEventHelper
+  - hash:
+      serializedVersion: 2
       Hash: da5a949a0bbd2ff91bc51c5805c2c41f
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnMouseUpAsButtonMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: a31afa465c7810a9c599e2aa04971192
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: StringLibrary
   - hash:
       serializedVersion: 2
       Hash: 2b1907a81f27f3d7f39ef7b7e6776492
@@ -1586,10 +2296,22 @@ ScriptsOnlyBuild:
     className: PredictedSpawn
   - hash:
       serializedVersion: 2
+      Hash: c33d3ded24dcec6d64f41da3a89831db
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: FriendProfile
+  - hash:
+      serializedVersion: 2
       Hash: 4f353524ce6564e40764f1ea080b2d85
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnTriggerStay2DMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 9ed1dd0a11b8cf662caa1d9e6e955843
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: BoolListVariable
   - hash:
       serializedVersion: 2
       Hash: 9104447b683bf70406fa01f12ecb564a
@@ -1634,10 +2356,22 @@ ScriptsOnlyBuild:
     className: OfflineRigidbody
   - hash:
       serializedVersion: 2
+      Hash: c2308799291a5fe2bebeb1ef66d63115
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: TriggerExitSender
+  - hash:
+      serializedVersion: 2
       Hash: 672716ae97f6ddb615fa5ac3ec9da349
     assemblyName: UnityEngine.TestRunner
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
+  - hash:
+      serializedVersion: 2
+      Hash: cf632d0ee2c06c2c99c565ff6fde0273
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedLongGameEventListener
   - hash:
       serializedVersion: 2
       Hash: 2ca4e47645c8410043ab04cd2d042a86
@@ -1652,10 +2386,46 @@ ScriptsOnlyBuild:
     className: SceneCondition
   - hash:
       serializedVersion: 2
+      Hash: ba728081fc7669525f02f256be8a86f4
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector3ListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 36e8933e5dbf52c8c56cf06c6bab5889
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: DoubleVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 859d2ba47e85f368130c76ce721583c0
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: CollisionStaySender
+  - hash:
+      serializedVersion: 2
       Hash: 8bbce9932f67ad8e7f4eefec87800f94
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 475bbf3ab61ad9cf65778dde0261a68c
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector2IntVariable
+  - hash:
+      serializedVersion: 2
+      Hash: b4bbbae0174f9fa8fcb14d2dc0f968a9
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Vector4ChangeEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: ec60430e75181150deb5dfa7d9d84c91
+    assemblyName: Assembly-CSharp
+    namespaceName: FishySteamworks
+    className: FishySteamworks
   - hash:
       serializedVersion: 2
       Hash: 7fdd3ee28e9042c3ec83463d0bb3b230
@@ -1664,10 +2434,40 @@ ScriptsOnlyBuild:
     className: TMP_FrameRateCounter
   - hash:
       serializedVersion: 2
+      Hash: 05b0821e70e0fd9d9b00415904d5cc5b
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float4ChangeEvent
+  - hash:
+      serializedVersion: 2
       Hash: 68c87d34c5ec5ff9bf9408cd22dccf2b
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Demo.Benchmarks.NetworkTransforms
     className: MoveRandomlyPhysics
+  - hash:
+      serializedVersion: 2
+      Hash: 38679b3348bcaeb99ceee443c580aa5e
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: DoubleListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: a85db1dc5b6533029114b28b9b80c741
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector2ListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 23f75039ccf201441ff4ca4ce58bdc8d
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetUserAvatar
+  - hash:
+      serializedVersion: 2
+      Hash: 0623d08330dd3d3511ebe835f51d6581
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: CameraPointerVariable
   - hash:
       serializedVersion: 2
       Hash: f669be52680c88846b2093fd41d1e06e
@@ -1676,10 +2476,34 @@ ScriptsOnlyBuild:
     className: UnityOnDragMessageListener
   - hash:
       serializedVersion: 2
+      Hash: ec6ca14bd1d6aea06ac8fd258ce50df0
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: FloatStatObject
+  - hash:
+      serializedVersion: 2
+      Hash: 55b48e6f2e60666a45f8f307cfc92865
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: RectTransformPointerListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 33062da96bd49bb2ac18ec2c616c4403
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetUserIdLabel
+  - hash:
+      serializedVersion: 2
       Hash: 20a120e55ad3ab65556328d5fd8309dd
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: Outline
+  - hash:
+      serializedVersion: 2
+      Hash: 39666dd7ef75d662d67642eb3aa1ac0e
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: GameEventListener
   - hash:
       serializedVersion: 2
       Hash: 17142b03663387290480c82303274c02
@@ -1698,6 +2522,30 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 741a14ed222086af01876fac6cc70431
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: UnsignedLongVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 8a5aa0852e11166b776b1b9af5cc1030
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: LongGameEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 617a888570319977426fbf389c1eb146
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: FloatGameEventListener
+  - hash:
+      serializedVersion: 2
+      Hash: 44b8ab9be881ee9c2ec6b4b76737a74b
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetUserName
   - hash:
       serializedVersion: 2
       Hash: c4b85a67513b4f0cf7b5fb2d5ded04b0
@@ -1736,6 +2584,12 @@ ScriptsOnlyBuild:
     className: UpgradeFromV3ToV4Menu
   - hash:
       serializedVersion: 2
+      Hash: 48c819b38d276594bf312b50e9ae8872
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: TransformChangeEventListener
+  - hash:
+      serializedVersion: 2
       Hash: e8d390bd9ecacc453a7500b90d0c0292
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.EventSystems
@@ -1746,6 +2600,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: PlayModeRunnerCallback
+  - hash:
+      serializedVersion: 2
+      Hash: f72486230a34948af8d25bc915afef94
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: TransformListVariable
   - hash:
       serializedVersion: 2
       Hash: afb7b65d28d5a7423e69a1b076be0064
@@ -1770,6 +2630,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro
     className: TMP_TextEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 1cae435e297cace74d263bb55c25b8ed
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: StringChangeEventListener
   - hash:
       serializedVersion: 2
       Hash: 5659132dc8fe1af600583a1cea620003
@@ -1808,6 +2674,30 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
+      Hash: 29bc10049e67f641fae7dd7483fe5912
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: TexturePointerVariable
+  - hash:
+      serializedVersion: 2
+      Hash: e68027b27e5baf6322154277ae6e9f16
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: AvgRateStatObject
+  - hash:
+      serializedVersion: 2
+      Hash: 2470210568b84a04b0a31973b4086687
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: StringField
+  - hash:
+      serializedVersion: 2
+      Hash: 11f45ad9c8645ae2c598c9ed3e75b0cc
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: LongVariable
+  - hash:
+      serializedVersion: 2
       Hash: e2734bcc7b3e94776ade5d59f54fec1e
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
@@ -1838,10 +2728,34 @@ ScriptsOnlyBuild:
     className: PlayerMotor
   - hash:
       serializedVersion: 2
+      Hash: 70e74ec69dc7ace9b682ae9bc6938aa5
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: Vector4ListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: bc70d735e9bacce37de9402c65535a5b
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: SteamManager
+  - hash:
+      serializedVersion: 2
+      Hash: adba0be119a692d201e412547146d1d3
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: UnsignedLongListVariable
+  - hash:
+      serializedVersion: 2
       Hash: 67272c9c30c50b68ef1ce72ac0191c57
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnMoveMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: b7b5e251623621af3756c3ce8e6e9587
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: UnsignedLongChangeEventListener
   - hash:
       serializedVersion: 2
       Hash: 319119f32576bc5d1cce604ede989939
@@ -1862,6 +2776,12 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
+      Hash: fe09386ae713640ef5d042ed0822f1bd
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: SteamworksCreator
+  - hash:
+      serializedVersion: 2
       Hash: 98c9cdc32649cea415149e17aa5329e2
     assemblyName: Assembly-CSharp
     namespaceName: FishNet.Upgrading.Mirror.Editing
@@ -1872,6 +2792,18 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: ScrollRect
+  - hash:
+      serializedVersion: 2
+      Hash: fe46ff917bb76633c8610cbcd8495b0c
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: AnimationCurveListVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 7398193ef7f6aa23d4f4926dec073ba3
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: QuaternionListVariable
   - hash:
       serializedVersion: 2
       Hash: 94df6005096f9833537111a110a3bcb4
@@ -1892,10 +2824,28 @@ ScriptsOnlyBuild:
     className: OptionMenuButton
   - hash:
       serializedVersion: 2
+      Hash: 09117b36acfe82f7cb25235520f8fba7
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: SceneProcessStateGameEvent
+  - hash:
+      serializedVersion: 2
+      Hash: 50f99bea57e1e3f5988ee51388150a17
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: LongChangeEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 69fad94d0e65f853849877822f4d3fde
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Managing.Object
     className: DualPrefabObjects
+  - hash:
+      serializedVersion: 2
+      Hash: f5165a3563173270f8eb272739bbbaf7
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: FriendInviteDropDown
   - hash:
       serializedVersion: 2
       Hash: 19e2416ff1477a10d399dfefe11f9a8e
@@ -1916,6 +2866,18 @@ ScriptsOnlyBuild:
     className: ColliderRollbackEditor
   - hash:
       serializedVersion: 2
+      Hash: f808238fc18febd34dd69013ab3d7ba0
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: TransformVariable
+  - hash:
+      serializedVersion: 2
+      Hash: 339db5726ec10548a485bba6a3c0e20d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: StringListVariable
+  - hash:
+      serializedVersion: 2
       Hash: 0f5a086d4d028363983ba6ca30a01397
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1934,16 +2896,40 @@ ScriptsOnlyBuild:
     className: StatisticsManager
   - hash:
       serializedVersion: 2
+      Hash: 74c8a883a1a3b8358f512cc209a18f1d
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: DataLibraryVariable
+  - hash:
+      serializedVersion: 2
       Hash: 2c583ad0ac85d03e8700dd05fdcb46cb
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: Variables
   - hash:
       serializedVersion: 2
+      Hash: a033f95b6fca1d0eeb5539342ff02532
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetAchievementIcon
+  - hash:
+      serializedVersion: 2
       Hash: 502a0d788634601faaefeacfda55e23a
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: DropdownSample
+  - hash:
+      serializedVersion: 2
+      Hash: ab7a429f19d056951b9afaa6db046df7
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: SetUserStatus
+  - hash:
+      serializedVersion: 2
+      Hash: 9d2b21ec26e45793a2b970e4ffb57d9c
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: CanvasPointerVariable
   - hash:
       serializedVersion: 2
       Hash: b30c8635462e66ac20f4241106119f77
@@ -1964,6 +2950,12 @@ ScriptsOnlyBuild:
     className: OwnerOnlyCondition
   - hash:
       serializedVersion: 2
+      Hash: 518a02e34bf05425a788270e00af1c6e
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: DoubleGameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: e7331cf89946257e2d2b18077729ab6f
     assemblyName: FishNet.Demos
     namespaceName: FishNet.Demo.Prediction.Rigidbodies
@@ -1974,6 +2966,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: VertexColorCycler
+  - hash:
+      serializedVersion: 2
+      Hash: 79c282617c9f9497fd1df606dee815f4
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering
+    className: KeyedStringListVariable
   - hash:
       serializedVersion: 2
       Hash: 568292fb7ea6c4f7a667e5ff76bc7e85
@@ -1988,6 +2986,12 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
+      Hash: 9d700a7aed808ccfebbdb0447d9a1488
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: LongChangeEvent
+  - hash:
+      serializedVersion: 2
       Hash: 4529e0df72d8b0fa016d2dacc44bbacb
     assemblyName: Assembly-CSharp
     namespaceName: 
@@ -2000,16 +3004,34 @@ ScriptsOnlyBuild:
     className: TeleType
   - hash:
       serializedVersion: 2
+      Hash: 4780e05d3c662adf6083fd713460f6f4
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration.UI
+    className: FriendGroupsDisplay
+  - hash:
+      serializedVersion: 2
       Hash: 9fb1c3ab48b256d508ecddd967f98652
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: VertexZoom
   - hash:
       serializedVersion: 2
+      Hash: 41fc4ec3ebad096dcc702dca9973e5f3
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: DoubleGameEvent
+  - hash:
+      serializedVersion: 2
       Hash: 1413deb228c2e53936de245b000e39ca
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Component.Observing
     className: DistanceCondition
+  - hash:
+      serializedVersion: 2
+      Hash: 3beb9302f3e5447946ba0129e5c9a5a9
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: FriendManager
   - hash:
       serializedVersion: 2
       Hash: 773b841acdc8b4f4333f540a0df7edd5
@@ -2030,10 +3052,22 @@ ScriptsOnlyBuild:
     className: MonoTickSmoother
   - hash:
       serializedVersion: 2
+      Hash: b2883a10460b490a7a6322c835a3472a
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Int2GameEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 1bd335374e476ba6f75d2cdb20244eeb
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Managing.Timing
     className: TimeManager
+  - hash:
+      serializedVersion: 2
+      Hash: 36644383db6ec7d4b2582353e4b81ac7
+    assemblyName: Heathen.Steamworks
+    namespaceName: HeathenEngineering.SteamworksIntegration
+    className: SteamSystemEvents
   - hash:
       serializedVersion: 2
       Hash: 02a47340661d2ea7c6d30e292cfef403
@@ -2060,10 +3094,22 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
+      Hash: 148f5f40e6b09532fa657fc53752b153
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: DoubleChangeEventListener
+  - hash:
+      serializedVersion: 2
       Hash: 2e4ab5d0a6abfaee066e19c4a341989a
     assemblyName: FishNet.Runtime
     namespaceName: FishNet.Object
     className: NetworkObject
+  - hash:
+      serializedVersion: 2
+      Hash: c31f14f32f13798b99aebfe6eeadf63c
+    assemblyName: Heathen.Core
+    namespaceName: HeathenEngineering.Events
+    className: Float4GameEvent
   - hash:
       serializedVersion: 2
       Hash: 752e8c30e95bfdc033a7875c63208241
@@ -2094,13 +3140,8 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 93982daf796521f9d84dcd541185e532
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Test
   platform: 19
   scenePathNames:
-  - Assets/Scenes/Online Games/X0-Online.unity
+  - Assets/Scenes/Bootstrap.unity
+  - Assets/Scenes/MainMenu.unity
   playerPath: C:/Users/sumur/Desktop/Build/Board Breakers.exe
