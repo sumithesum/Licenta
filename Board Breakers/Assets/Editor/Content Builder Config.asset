@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Content Builder Config
   m_EditorClassIdentifier: 
   username: 
-  rememberPassword: 1
+  rememberPassword: 0
   password: 
   targetApp: 480
   lastDepot: 0
