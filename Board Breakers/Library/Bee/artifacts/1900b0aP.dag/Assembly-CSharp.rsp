@@ -322,6 +322,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/BootstrapManager.cs"
+"Assets/BootStrapNetworkManager.cs"
 "Assets/FishNet/Plugins/FishySteamworks/Core/BidirectionalDictionary.cs"
 "Assets/FishNet/Plugins/FishySteamworks/Core/ClientHostSocket.cs"
 "Assets/FishNet/Plugins/FishySteamworks/Core/ClientSocket.cs"

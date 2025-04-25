@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Steamworks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,4 +72,22 @@ public class MainMenuManager : MonoBehaviour
         CSteamID steamID = new CSteamID(Convert.ToUInt64(lobbyInput.text));
         BootstrapManager.JoinById(steamID);
     }
+
+    public void exit()
+    {
+        
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit(); 
+        
+    }
+
+    public void startGame()
+    {
+        string[] scenesToClose = new string[] { "MainMenu" };
+
+        BootStrapNetworkManager.changeNetworkScene("MainGame", scenesToClose);
+    } 
+
+
+    
 }

@@ -29,6 +29,7 @@ public class BootstrapManager : MonoBehaviour
         LobbyCreated = Callback<LobbyCreated_t>.Create(onLobbyCreated);
         JoinRequest = Callback<GameLobbyJoinRequested_t>.Create(onJoinRequest);
         LobbyEnter = Callback<LobbyEnter_t>.Create(onLobbyEnter);
+        
     }
 
     public void GoToMenu() {
