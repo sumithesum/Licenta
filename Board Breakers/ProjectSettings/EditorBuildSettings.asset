@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Online Games/MainGame.unity
-    guid: a4aac17ffc563a14cb6b74069cc77ab7
-  - enabled: 1
     path: Assets/Scenes/Bootstrap.unity
     guid: 0b013cb55e324184da33efe9e0028009
   - enabled: 1
@@ -20,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Online Games/X0-Online.unity
     guid: 92fdbdb02e7c8304ca6c05d2fd8cabd4
+  - enabled: 1
+    path: Assets/Scenes/Online Games/MainGame.unity
+    guid: a4aac17ffc563a14cb6b74069cc77ab7
   m_configObjects: {}

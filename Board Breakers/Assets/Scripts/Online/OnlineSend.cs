@@ -46,9 +46,11 @@ public class OnlineSend : NetworkBehaviour
     private void SendMoveToOtherClient(Vector3 startPos, Vector3 endPos, OnlineSend script)
     {
 
-        
-        print(Movement(startPos, endPos,true));
-        printBoard();
+
+        if (Movement(startPos, endPos, true) == 2)
+            BootStrapNetworkManager.changeNetworkScene("X0-Online", new string[] { "MainGame"});
+
+
 
 
         isWhiteTurn = !isWhiteTurn;
