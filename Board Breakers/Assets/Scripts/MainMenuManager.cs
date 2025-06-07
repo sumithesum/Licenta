@@ -8,7 +8,7 @@ public class MainMenuManager : MonoBehaviour
 {
     private static MainMenuManager instance;
 
-    [SerializeField] private GameObject menuScreem, lobbyscreen , soundScreen;
+    [SerializeField] private GameObject menuScreem, lobbyscreen , soundScreen , lobbyJoin, chat;
     [SerializeField] private TMP_InputField lobbyInput;
 
     [SerializeField] private Button startGameButton;
@@ -39,6 +39,9 @@ public class MainMenuManager : MonoBehaviour
         menuScreem.SetActive(false);
         lobbyscreen.SetActive(false);
         soundScreen.SetActive(false);
+        lobbyJoin.SetActive(false);
+        chat.SetActive(false);
+        
     }
 
     public void OpenMainMenu()
@@ -47,6 +50,7 @@ public class MainMenuManager : MonoBehaviour
         menuScreem.SetActive(true);
     }
 
+   
     public static void lobbyEntered(string name, bool isHost)
     {
         instance.lobbyTitle.text = name;
@@ -55,10 +59,18 @@ public class MainMenuManager : MonoBehaviour
         instance.openLobby();
     }
 
+
     public void openLobby()
     {
         closeAllScreens();
         lobbyscreen.SetActive(true);
+        chat.SetActive(true);
+    }
+    
+    public void openLobbyJoin()
+    {
+        closeAllScreens();
+        lobbyJoin.SetActive(true);
     }
 
     public void leaveLobby()
@@ -71,6 +83,7 @@ public class MainMenuManager : MonoBehaviour
     public void joinLobby()
     {
         CSteamID steamID = new CSteamID(Convert.ToUInt64(lobbyInput.text));
+        print("Joining");
         BootstrapManager.JoinById(steamID);
     }
 
@@ -101,4 +114,10 @@ public class MainMenuManager : MonoBehaviour
         menuScreem.SetActive(true);
     }
     
+    public void SaveToClipboard()
+    {
+        GUIUtility.systemCopyBuffer = lobbyIdText.text;
+        
+    }
+
 }

@@ -9,6 +9,8 @@ public class OnlineSend : NetworkBehaviour
 {
     public static OnlineSend Local;
 
+    public static string lastScene;
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -42,24 +44,78 @@ public class OnlineSend : NetworkBehaviour
         SendMoveToOtherClient(startPos, endPos, this);
     }
 
-    [ObserversRpc(ExcludeOwner = true)]
+    [ObserversRpc]
     private void SendMoveToOtherClient(Vector3 startPos, Vector3 endPos, OnlineSend script)
     {
 
+        changeTurn();
 
-        if (Movement(startPos, endPos, true) == 2)
-            BootStrapNetworkManager.changeNetworkScene("X0-Online", new string[] { "MainGame"});
-
-
-
-
-        isWhiteTurn = !isWhiteTurn;
+        print("is White Turn ?  : " +isWhiteStatic);
+        int miscare = Movement(startPos, endPos, true);
+        ActualMovement(startPos, endPos, miscare);
         
+        if (miscare == 2)
+            {
+                print("Sa luat o piesa");
+            if(IsHostInitialized)
+                StartCoroutine(WaitAndChangeScene(chooseRandomScene()));
+
+        }
 
 
     }
 
-  
-    
+    public string chooseRandomScene()
+    {
+        string [] scenes = new string[]
+        {
+            //"X0-Online",
+            "1",
+            "2",
+            "3"
+        };
+
+        int random = Random.Range(0, scenes.Length);
+        print(random);
+        return scenes[random];
+    }
+
+    public  IEnumerator WaitAndChangeScene(string sceneName)
+    {
+        
+        yield return new WaitForSeconds(0.5f);
+
+        SendSceneChangeToServer(sceneName);
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SendSceneChangeToServer(string sceneName)
+    {
+        lastScene = sceneName;
+        print(lastScene + " IS LASTSCENE");
+        BootStrapNetworkManager.changeNetworkScene(sceneName, new string[] { "" });
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ClsoeSceneChangeToServer(string sceneToClose)
+    {
+
+        BootStrapNetworkManager.changeNetworkScene("", new string[] { sceneToClose });
+    }
+
+    //[ServerRpc]
+    //public void closeCameraServer()
+    //{
+    //    closeCamereObserver();
+    //}
+
+    //[ObserversRpc]
+    //private void closeCamereObserver()
+    //{
+    //    Destroy(Camera.main);
+    //}
+
 
 }

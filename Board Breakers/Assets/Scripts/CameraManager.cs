@@ -3,39 +3,37 @@ using FishNet.Object;
 using FishNet;
 using UnityEngine;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class CameraManager : NetworkBehaviour
 {
-    [SerializeField]
-    private Camera pCamera;
-
     public override void OnStartClient()
     {
+        GameObject camera;
         base.OnStartClient();
         if (IsOwner)
         {
-            pCamera = Camera.main;
             gameObject.AddComponent<GameManager>();
 
-            GameManager.isWhiteStatic = false; 
-            RequestPlayerColorServerRpc();
+            camera = Cameras.instance.spawnCameraMain();
+
+            camera.SetActive(true);
+            camera.tag = "MainCamera";
+            RequestPlayerColorServerRpc(PlayerHost.isHost);
+
         }
         else
-        { 
+        {
             gameObject.GetComponent<CameraManager>().enabled = false;
 
         }
     }
 
     [ServerRpc]
-    private void RequestPlayerColorServerRpc()
+    private void RequestPlayerColorServerRpc(bool isHost)
     {
-        int count = InstanceFinder.ServerManager.Clients.Count;
-        bool assignedColor = (count == 1); 
 
-        Debug.Log($"[Server] Player count: {count}. Assigning white? {assignedColor}");
-
-        TargetReceivePlayerColor(base.Owner, assignedColor);
+        TargetReceivePlayerColor(base.Owner, isHost);
     }
 
     [TargetRpc]
@@ -43,8 +41,8 @@ public class CameraManager : NetworkBehaviour
     {
         Debug.Log($"[Client] Am primit culoarea de la server: {isWhite}");
 
-        GameManager.isWhiteStatic = isWhite;
-        gameObject.GetComponent<GameManager>().changeReferencePoint();
-
+        // Fix: Access the static field 'isWhite' using the class name 'GameManager' instead of an instance reference.  
+        GameManager.isWhite = isWhite;
+        GameManager gm = gameObject.GetComponent<GameManager>();
     }
 }

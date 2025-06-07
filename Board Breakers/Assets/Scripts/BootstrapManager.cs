@@ -39,12 +39,12 @@ public class BootstrapManager : MonoBehaviour
     public static void CreateLobby()
     {
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 2);
-        //OnLobbycreated si onLobby enter vor rula instant dupa asta (desigur ca din cauza ca faci un lobby)
+        //OnLobbycreated si onLobbyEnter vor rula instant dupa asta (desigur ca din cauza ca faci un lobby)
     }
 
     public void onLobbyCreated(LobbyCreated_t callback)
     {
-        print("Lobby creation" + callback.m_eResult.ToString());
+       
 
         if (callback.m_eResult != EResult.k_EResultOK)
         {
@@ -70,6 +70,11 @@ public class BootstrapManager : MonoBehaviour
     {
         currentLobbyId = callback.m_ulSteamIDLobby;
 
+        CSteamID lobbyOwner = SteamMatchmaking.GetLobbyOwner(new CSteamID(currentLobbyId));
+        PlayerHost.isHost = (lobbyOwner == SteamUser.GetSteamID());
+        PlayerHost.username = SteamFriends.GetPersonaName();
+        print(PlayerHost.username + "   este username playerului current ?");
+
         MainMenuManager.lobbyEntered(SteamMatchmaking.GetLobbyData(new CSteamID(currentLobbyId), "name"), _netmanager.IsServerStarted);
 
         _fishySteamworks.SetClientAddress(SteamMatchmaking.GetLobbyData(new CSteamID(currentLobbyId), "HostAddress"));
@@ -79,7 +84,7 @@ public class BootstrapManager : MonoBehaviour
 
     public static void JoinById(CSteamID steamID)
     {
-        print("Joining lobby with the id: " + steamID.m_SteamID);
+        
         if (SteamMatchmaking.RequestLobbyData(steamID))
             SteamMatchmaking.JoinLobby(steamID);
         else

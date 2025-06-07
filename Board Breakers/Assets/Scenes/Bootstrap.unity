@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 376318597}
   - component: {fileID: 376318596}
   - component: {fileID: 376318598}
+  - component: {fileID: 376318599}
   m_Layer: 0
   m_Name: BootsrapManager
   m_TagString: Untagged
@@ -201,6 +202,19 @@ MonoBehaviour:
   menuName: MainMenu
   _netmanager: {fileID: 7443408887404065277}
   _fishySteamworks: {fileID: 7443408887404065280}
+--- !u!114 &376318599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376318595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adee44501faa35740add2a1dddb241f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 7530135757872288269, guid: c4c8f995e8915c14e83ea304bc719cb2, type: 3}
 --- !u!1 &387146123
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +314,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 387146125}
   _networkObjectCache: {fileID: 0}
   playerMainGame: {fileID: 1543585375431038349, guid: c6402bac96e70fe448eaeee43f57872f, type: 3}
+  playerX0: {fileID: 2041457195057620252, guid: b60e34d96ea8a654cbcd9d37c706b504, type: 3}
 --- !u!114 &1478332635
 MonoBehaviour:
   m_ObjectHideFlags: 0

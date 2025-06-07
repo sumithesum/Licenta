@@ -5,6 +5,7 @@ using static Utils;
 using static GameManager;
 using FishNet.Object;
 using static OnlineSend;
+using Unity.VisualScripting;
 
 
 
@@ -13,22 +14,25 @@ public class Pices : NetworkBehaviour
     [SerializeField]
     public PieceData data = new PieceData();
 
-    public GameObject gameManager ;
-    
-    [SerializeField]
+    private Vector3 initialALPos;
     private Vector3 initialPos;
     private Vector3 offset;
 
 
+    public void ReturnToInitialPos()
+    {
+        this.gameObject.transform.position = initialPos;
+    }
 
     private void OnMouseDown()
     {
-        
+        initialALPos = initialPos;
         initialPos = this.transform.position;
         offset = initialPos - this.GetMouseWorldPosition();
         
 
     }
+
 
     private void OnMouseDrag()
     {
@@ -55,30 +59,47 @@ public class Pices : NetworkBehaviour
         ///Check if is the player turn (100% will need to be changed in the future)
         ///And check if the next pos to be moved is on the board 
 
-        else if (((this.name.EndsWith("White(Clone)") && isWhiteTurn) || (this.name.EndsWith("Black(Clone)") && !isWhiteTurn)) && 
-            (this.transform.position.x <= endPosition.x && this.transform.position.x >= (startPosition.x - 0.5f) &&
-            this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f)) && 
-            Movement(initialPos,this.transform.position,recived) != 0  )
-        {
-            if (isWhiteTurn)
-                isWhiteTurn = false;
-            else
-                isWhiteTurn = true;
+        if ((this.name.EndsWith("White(Clone)") && !isWhite) || (this.name.EndsWith("Black(Clone)") && isWhite))
+            this.transform.position = initialPos;
 
-            if (!recived)
+        else
+        {
+
+
+            if (((this.name.EndsWith("White(Clone)") && (isWhiteStatic == true)) || (this.name.EndsWith("Black(Clone)") && !(isWhiteStatic == true))) &&
+            (this.transform.position.x <= endPosition.x && this.transform.position.x >= (startPosition.x - 0.5f) &&
+            this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f))
+            )
             {
-                print("[Piece]Se trimit miscarea");
-                OnlineSend.Send(initialPos, this.transform.position);
+                int movement = Movement(initialPos, this.transform.position, recived);
+
+                if (movement == 0)
+                {
+                    this.transform.position = initialPos;
+
+                }
+                else
+                {
+                    ActualMovement(initialPos, this.transform.position, movement);
+                    if (!recived)
+                    {
+                        OnlineSend.Send(initialPos, this.transform.position);
+
+                    }
+
+                    this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.5f, -1);
+
+                    printBoard();
+                    yield return new WaitForSeconds(1.5f);
+                }
+
             }
 
-            this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.5f, -1); 
-
-            printBoard();
-            yield return new WaitForSeconds(1f);
-            
+            else
+            {
+                this.transform.position = initialPos;
+            }
         }
-        else
-            this.transform.position = initialPos;
            
     }
 
@@ -96,7 +117,7 @@ public class Pices : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        initialPos = this.transform.position;
     }
 
    

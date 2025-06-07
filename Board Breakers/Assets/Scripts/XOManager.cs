@@ -34,8 +34,9 @@ public class XOManager : NetworkBehaviour
         base.OnStartClient();
         if (IsOwner)
         {
-            RequestPlayerShapeServerRpc();
-            print("Salut " + isCircle);
+            isCircle = PlayerHost.isHost;
+
+
             string s = isCircle ? "Cirlce" : "X";
             Test.StaticSetScore(s);
         }
@@ -88,6 +89,8 @@ public class XOManager : NetworkBehaviour
 
                     if (mat == X || mat == O) return;
 
+                    print(hit.collider.gameObject.name);
+
                     if (isCircle == isCircleTurn)
                     {
                         int index = int.Parse(hit.collider.gameObject.name);
@@ -121,7 +124,7 @@ public class XOManager : NetworkBehaviour
                 ListTiles.Tiles[1].GetComponent<Renderer>().material.name == "O (Instance)"))
         {
             ListTiles.Tiles[0].gameObject.SetActive(false);
-            print("Salut");
+            
         }
 
         else if (ListTiles.Tiles[1].GetComponent<Renderer>().material.name == ListTiles.Tiles[4].GetComponent<Renderer>().material.name
@@ -252,9 +255,9 @@ public class XOManager : NetworkBehaviour
         else
             isCircleTurn = true;
 
+        print("Now it s time for :" + isCircleTurn);
         
         
-
     }
 
 

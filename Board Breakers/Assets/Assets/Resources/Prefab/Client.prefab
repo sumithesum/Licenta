@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5950293338606402030}
   - component: {fileID: 7067201109942294421}
   - component: {fileID: 974438011711369442}
-  - component: {fileID: 5279911832227702107}
+  - component: {fileID: 3767513587537756317}
   m_Layer: 0
   m_Name: Client
   m_TagString: Untagged
@@ -125,7 +125,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 5279911832227702107}
+  - {fileID: 3767513587537756317}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -174,7 +174,7 @@ MonoBehaviour:
   _overrideType: 3
   _updateHostVisibility: 1
   _observerConditions: []
---- !u!114 &5279911832227702107
+--- !u!114 &3767513587537756317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

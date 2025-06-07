@@ -1,13 +1,13 @@
-using FishNet.Object;
-using JetBrains.Annotations;
+
 using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using static Utils;
 
 public class GameManager : MonoBehaviour
 {
 
-    public bool isWhite = true;
+    public static bool isWhite = true;
 
     public static bool isWhiteStatic = true;
 
@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
     private GameObject plane;
     [SerializeField]
     public static GameObject[] board = new GameObject[64];
+    public static GameObject[] tiles = new GameObject[64];
+
+    public static Vector3  LastTakerPos;
+    public static Vector3  LastTakenPos;
+
+    public static bool inMinigame = false;
 
     private bool createEmptyMap()
     {
@@ -33,12 +39,12 @@ public class GameManager : MonoBehaviour
                 alb = alb == true ? false : true;
             if (!alb)
             {
-                Instantiate(blackPrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
+                tiles[i] = Instantiate(blackPrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
                 alb = true;
             }
             else
             {
-                Instantiate(whitePrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
+                tiles[i] = Instantiate(whitePrefab, new Vector3(startPosition.x + i % 8, startPosition.y + (i / 8)), Quaternion.identity);
                 alb = false;
             }
 
@@ -46,7 +52,10 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-
+    public static void changeTurn()
+    {
+        isWhiteStatic = !isWhiteStatic;
+    }
 
     public static void printBoard()
     {
@@ -174,10 +183,28 @@ public class GameManager : MonoBehaviour
         //}
 
 
-
+        changeReferencePoint();
         return true;
     }
 
+    private void Update()
+    {
+        if (!inMinigame)
+        {
+            if (PlayerHost.isHost)
+            {
+
+                Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+             
+            }
+            else
+            {
+                Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            }
+            if (!tiles[0].gameObject.activeSelf)
+                open();
+        }
+    }
 
     void Start()
     {
@@ -203,24 +230,20 @@ public class GameManager : MonoBehaviour
             if (createEmptyMap())
                 if (createStartingPieces())
                     printBoard();
-        if (!isWhiteStatic)
-        {
-            Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-            for (int i = 0; i < 64; i++)
-               board[i].transform.rotation = Quaternion.Euler(270f, 0f, 0f);
-        }
-        print(isWhiteStatic);
+        changeReferencePoint();
+
     }
 
     /// <summary>
-    /// Changes the camera and pieces rotation on player turn
+    /// Changes the camera and pieces rotation on start
     /// </summary>
 
     public void changeReferencePoint()
     {
-        
-        if (isWhiteStatic)
+       
+        if (PlayerHost.isHost)
         {
+         
             Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             for (int i = 0; i < 64; i++)
                 board[i].transform.rotation = Quaternion.Euler(90f, 180f, 0f);
@@ -230,23 +253,130 @@ public class GameManager : MonoBehaviour
             Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
             for (int i = 0; i < 64; i++)
                 board[i].transform.rotation = Quaternion.Euler(270f, 0f, 0f);
+            Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
         }
         
 
-}
+    }
+
+    public static void close()
+    {
+        print("closing");
+        foreach (var piese in board)
+            piese.SetActive(false);
+        foreach (var piese in tiles)
+            piese.SetActive(false);
+    }
+    public static void open()
+    {
+        foreach (var piese in board)
+            piese.SetActive(true);
+        foreach (var piese in tiles)
+            piese.SetActive(true);
+    }
+
+    public static void ActualMovement(Vector3 startPos, Vector3 endPos , int movement)
+    {
+        int indexStart = ((int)startPos.y) * 8 + ((int)startPos.x);
+        int indexEnd = ((int)endPos.y) * 8 + ((int)endPos.x);
+
+        if (movement == 2)
+        {
+            close();
+
+            LastTakerPos = startPos;
+            LastTakenPos = endPos;
+
+            inMinigame = true;
+            Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        }
+        else if (movement == 1)
+        {
+            board[indexStart].GetComponent<Pices>().data.firstMove = false;
+            GameObject aux = board[indexStart];
+            board[indexStart] = board[indexEnd];
+            board[indexEnd] = aux;
+        }
+    }
 
 
+    public static int valoare(string nume)
+    {
+        switch (nume)
+        {
+            case "Pawn": return 1;
+            case "Knight":
+            case "Bishop": return 3;
+            case "Rook": return 5;
+            case "Queen": return 8;
+            case "Knig": return 10;
+        }
+        return -1;
+    }
 
-    /// <summary>
-    /// Veryfys if a movement is ok
-    /// </summary>
-    /// <param name="startPos"></param>
-    /// <param name="endPos"></param>
-    /// <returns> 
-    /// 0 if the movement is not possible 
-    /// 1 if the movement is possible and no piece is captured 
-    /// 2 if the movement is possible and a piece is captured 
-    /// </returns>
+    ///E functioanl cu bugguri ?
+    ///
+
+    public static void ReturnFromMinigame(int caz)
+    {
+        print("Returning");
+        open();
+        inMinigame = false;
+        ///1 atacatorul castiga
+        ///2 atacatul castiga
+        ///3 Draw
+        string pieceNameTaker = "";
+        string pieceNameTaken = "";
+
+        int indexStart = ((int)LastTakerPos.y) * 8 + ((int)LastTakerPos.x);
+        int indexEnd = ((int)LastTakenPos.y) * 8 + ((int)LastTakenPos.x);
+
+        Match match = Regex.Match(board[indexStart].name, @"^(Pawn|Knight|Bishop|Rook|Queen|King)");
+        if (match.Success)
+        {
+            pieceNameTaker = match.Value;
+        }
+        match = Regex.Match(board[indexEnd].name, @"^(Pawn|Knight|Bishop|Rook|Queen|King)");
+        if (match.Success)
+        {
+            pieceNameTaken = match.Value;
+        }
+
+        print(pieceNameTaker + " : " + pieceNameTaken + "   Aceaste peieseeeeeee");
+
+        if (caz == 3)
+        {
+            if (valoare(pieceNameTaker) > valoare(pieceNameTaken))
+            {
+                Destroy(board[indexEnd]);
+                board[indexEnd] = board[indexStart];
+                board[indexStart] = new GameObject("Null");
+            }
+            else
+            {
+                board[indexStart].transform.position = LastTakerPos;
+            }
+        }
+        else if(caz == 1)
+        {
+            Destroy(board[indexEnd]);
+            board[indexEnd] = board[indexStart];
+            board[indexStart] = new GameObject("Null");
+            
+        }
+        else
+        {
+            board[indexStart].transform.position = LastTakerPos;
+        }
+        
+
+        //Destroy(board[indexEnd]);
+        //board[indexEnd] = board[indexStart];
+        //board[indexStart] = new GameObject("Null");
+    }
+
+  
     public static int Movement(Vector3 startPos, Vector3 endPos,bool recived)
     {
         
@@ -283,9 +413,7 @@ public class GameManager : MonoBehaviour
                     if ((movement == +9 && board[indexEnd].name != "Null" && !board[indexEnd].GetComponent<Pices>().data.isWhite) ||
                         (movement == +7 && board[indexEnd].name != "Null" && !board[indexEnd].GetComponent<Pices>().data.isWhite))
                     {
-                        Destroy(board[indexEnd]);
-                        board[indexEnd] = board[indexStart];
-                        board[indexStart] = new GameObject("Null");
+                        
 
                         return 2;
                     }
@@ -323,23 +451,17 @@ public class GameManager : MonoBehaviour
                             return 0;
                         }
 
-                        board[indexStart].GetComponent<Pices>().data.firstMove = false;
-                        GameObject aux = board[indexStart];
-                        board[indexStart] = board[indexEnd];
-                        board[indexEnd] = aux;
+                  
 
-                        return 2;
+                        return 1;
 
                     }
 
                     if (movement == 8)
                     {
-                        board[indexStart].GetComponent<Pices>().data.firstMove = false;
-                        GameObject aux = board[indexStart];
-                        board[indexStart] = board[indexEnd];
-                        board[indexEnd] = aux;
+                       
 
-                        return 2;
+                        return 1;
                     }
 
 
@@ -358,9 +480,7 @@ public class GameManager : MonoBehaviour
                     if ((movement == -9 && board[indexEnd].name != "Null" && board[indexEnd].GetComponent<Pices>().data.isWhite) ||
                        (movement == -7 && board[indexEnd].name != "Null" && board[indexEnd].GetComponent<Pices>().data.isWhite))
                     {
-                        Destroy(board[indexEnd]);
-                        board[indexEnd] = board[indexStart];
-                        board[indexStart] = new GameObject("Null");
+                       
 
                         return 2;
                     }
@@ -397,10 +517,7 @@ public class GameManager : MonoBehaviour
 
                             return 0;
                         }
-                        board[indexStart].GetComponent<Pices>().data.firstMove = false;
-                        GameObject aux = board[indexStart];
-                        board[indexStart] = board[indexEnd];
-                        board[indexEnd] = aux;
+                       
 
                         return 1;
 
@@ -408,10 +525,7 @@ public class GameManager : MonoBehaviour
 
                     if (movement == -8)
                     {
-                        board[indexStart].GetComponent<Pices>().data.firstMove = false;
-                        GameObject aux = board[indexStart];
-                        board[indexStart] = board[indexEnd];
-                        board[indexEnd] = aux;
+                        
 
                         return 1;
                     }
@@ -433,17 +547,13 @@ public class GameManager : MonoBehaviour
                     {
                         if (board[indexEnd].name == "Null")
                         {
-                            GameObject aux = board[indexStart];
-                            board[indexStart] = board[indexEnd];
-                            board[indexEnd] = aux;
+                            
 
                             return 1;
                         }
                         else if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                         {
-                            Destroy(board[indexEnd]);
-                            board[indexEnd] = board[indexStart];
-                            board[indexStart] = new GameObject("Null");
+                           
                             return 2;
                         }
                     }
@@ -479,16 +589,12 @@ public class GameManager : MonoBehaviour
                     {
                         if (board[indexEnd].name == "Null")
                         {
-                            GameObject aux = board[indexEnd];
-                            board[indexEnd] = board[indexStart];
-                            board[indexStart] = aux;
+                            
                             return  1;
                         }
                         if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                         {
-                            Destroy(board[indexEnd]);
-                            board[indexEnd] = board[indexStart];
-                            board[indexStart] = new GameObject("Null");
+                          
                             return 2;
                         }
 
@@ -535,9 +641,7 @@ public class GameManager : MonoBehaviour
 
                     if (board[indexEnd].name == "Null")
                     {
-                        GameObject aux = board[indexStart];
-                        board[indexStart] = board[indexEnd];
-                        board[indexEnd] = aux;
+                       
 
                         return 1;
                     }
@@ -545,9 +649,7 @@ public class GameManager : MonoBehaviour
                     else if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                     {
 
-                        Destroy(board[indexEnd]);
-                        board[indexEnd] = board[indexStart];
-                        board[indexStart] = new GameObject("Null");
+                       
                         return 2;
 
                     }
@@ -565,16 +667,12 @@ public class GameManager : MonoBehaviour
                     {
                         if (board[indexEnd].name == "Null")
                         {
-                            GameObject aux = board[indexEnd];
-                            board[indexEnd] = board[indexStart];
-                            board[indexStart] = aux;
+                            
                             return 1;
                         }
                         if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                         {
-                            Destroy(board[indexEnd]);
-                            board[indexEnd] = board[indexStart];
-                            board[indexStart] = new GameObject("Null");
+                           
                             return 2;
                         }
 
@@ -606,9 +704,7 @@ public class GameManager : MonoBehaviour
 
                     if (board[indexEnd].name == "Null")
                     {
-                        GameObject aux = board[indexStart];
-                        board[indexStart] = board[indexEnd];
-                        board[indexEnd] = aux;
+                        
 
                         return 1;
                     }
@@ -616,9 +712,6 @@ public class GameManager : MonoBehaviour
                     else if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                     {
 
-                        Destroy(board[indexEnd]);
-                        board[indexEnd] = board[indexStart];
-                        board[indexStart] = new GameObject("Null");
                         return 2;
 
                     }
@@ -636,16 +729,12 @@ public class GameManager : MonoBehaviour
                     {
                         if (board[indexEnd].name == "Null")
                         {
-                            GameObject aux = board[indexEnd];
-                            board[indexEnd] = board[indexStart];
-                            board[indexStart] = aux;
+                           
                             return 1;
                         }
                         if (board[indexEnd].GetComponent<Pices>().data.isWhite != board[indexStart].GetComponent<Pices>().data.isWhite)
                         {
-                            Destroy(board[indexEnd]);
-                            board[indexEnd] = board[indexStart];
-                            board[indexStart] = new GameObject("Null");
+                           
                             return 2;
                         }
                     }
