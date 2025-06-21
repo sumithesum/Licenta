@@ -124,6 +124,13 @@
 -define:STEAMWORKS_NET
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/FireBase/Plugins/Firebase.App.dll"
+-r:"Assets/FireBase/Plugins/Firebase.Auth.dll"
+-r:"Assets/FireBase/Plugins/Firebase.Database.dll"
+-r:"Assets/FireBase/Plugins/Firebase.Installations.dll"
+-r:"Assets/FireBase/Plugins/Firebase.Platform.dll"
+-r:"Assets/FireBase/Plugins/Firebase.TaskExtension.dll"
+-r:"Assets/FireBase/Plugins/Google.MiniJson.dll"
 -r:"Assets/FishNet/Runtime/Plugins/CodeAnalysis/FishNet.CodeAnalysis.dll"
 -r:"Assets/Gamebuild/Lib/ICSharpCode.SharpZipLib.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
@@ -384,8 +391,8 @@
 "Assets/Gamebuild/Scripts/GameBuildBuilder.cs"
 "Assets/Gamebuild/Scripts/GameBuildConfig.cs"
 "Assets/Gamebuild/Scripts/GameBuildEditorWindow.cs"
-"Assets/PauseMenuControler.cs"
-"Assets/Return.cs"
+"Assets/LobbiesManager.cs"
+"Assets/LobbyManagerFirebase.cs"
 "Assets/Scripts/BallManagement.cs"
 "Assets/Scripts/BootstrapManager.cs"
 "Assets/Scripts/BootStrapNetworkManager.cs"
@@ -401,12 +408,14 @@
 "Assets/Scripts/Ofline/GameManager.cs"
 "Assets/Scripts/Online/OnlineSend.cs"
 "Assets/Scripts/Online/ServerMnager.cs"
+"Assets/Scripts/PauseMenuControler.cs"
 "Assets/Scripts/Pices.cs"
 "Assets/Scripts/PieceData.cs"
 "Assets/Scripts/PingPong/PingPongGame.cs"
 "Assets/Scripts/PlayerEmpty.cs"
 "Assets/Scripts/PlayerHost.cs"
 "Assets/Scripts/PlayerManager.cs"
+"Assets/Scripts/Return.cs"
 "Assets/Scripts/SceneLoader.cs"
 "Assets/Scripts/Send.cs"
 "Assets/Scripts/SendMesaje.cs"
@@ -415,6 +424,7 @@
 "Assets/Scripts/SpawnPoints.cs"
 "Assets/Scripts/Steamworks.NET/SteamManager.cs"
 "Assets/Scripts/Test.cs"
+"Assets/Scripts/Undestroybale.cs"
 "Assets/Scripts/Utils.cs"
 "Assets/Scripts/VectorSender.cs"
 "Assets/Scripts/XOManager.cs"
@@ -452,7 +462,6 @@
 "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs"
-"Assets/Undestroybale.cs"
 -langversion:9.0
 /deterministic
 /optimize+
