@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "110885269449",
+    "project_id": "joc-multy",
+    "storage_bucket": "joc-multy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110885269449:android:1c4688563f04d541c6c218",
+        "android_client_info": {
+          "package_name": "com.Board_Breakers.Sumurduc_Alexandru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDX4eabk6l27dCZJ544_xF3ZcZMDc73rU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
