@@ -69,10 +69,10 @@ public class OnlineSend : NetworkBehaviour
     {
         string [] scenes = new string[]
         {
-            //"X0-Online",
-            "1",
-            "2",
-            "3"
+            "X0-Online",
+            //"1",
+            //"2",
+            //"3"
         };
 
         int random = Random.Range(0, scenes.Length);

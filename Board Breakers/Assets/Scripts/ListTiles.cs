@@ -1,22 +1,21 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class ListTiles : MonoBehaviour
 {
-    [SerializeField]
+
     public static List<GameObject> Tiles = new List<GameObject>();
 
-    void Start()
+    void Awake()
     {
-        
+        Tiles.Clear();
         foreach (Transform child in gameObject.GetComponentsInChildren<Transform>())
         {
             Tiles.Add(child.gameObject);
         }
-
-        //printListNames();
+        print(Tiles.Count);
     }
 
     public void printListNames()
@@ -28,4 +27,7 @@ public class ListTiles : MonoBehaviour
         }
         print(list);
     }
+
+   
+
 }

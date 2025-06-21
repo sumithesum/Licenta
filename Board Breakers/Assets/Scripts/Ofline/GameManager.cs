@@ -316,11 +316,13 @@ public class GameManager : MonoBehaviour
     }
 
     ///E functioanl cu bugguri ?
-    ///
+    /// WhiteWon = 1 //WhiteWin
+    /// WhiteWon = 0 //BlackWin
+    /// WhiteWon = 3 Draw
 
-    public static void ReturnFromMinigame(int caz)
+    public static void ReturnFromMinigame(int whiteWon) 
     {
-        print("Returning");
+        print("Returning with case: " + whiteWon );
         open();
         inMinigame = false;
         ///1 atacatorul castiga
@@ -329,9 +331,36 @@ public class GameManager : MonoBehaviour
         string pieceNameTaker = "";
         string pieceNameTaken = "";
 
+        int caz = 3;
+
+        bool isWhiteAttaker = true;
+            
+
         int indexStart = ((int)LastTakerPos.y) * 8 + ((int)LastTakerPos.x);
         int indexEnd = ((int)LastTakenPos.y) * 8 + ((int)LastTakenPos.x);
 
+
+        if (!board[indexStart].GetComponent<Pices>().data.isWhite)
+        {
+            isWhiteAttaker = false;
+        }
+
+        if (whiteWon == 3)
+        {
+            caz = 3;
+        }
+        else
+        {
+            if ((whiteWon == 1) && isWhiteAttaker)          ///White Ataca si castiga
+                caz = 1;
+            else if ((whiteWon == 2) && !isWhiteAttaker)    ///Black Ataca si castiga
+                caz = 1;
+            else if ((whiteWon == 2) && isWhiteAttaker)     ///White Ataca si nu castiga
+                caz = 2;
+            else if ((whiteWon == 1) && !isWhiteAttaker)    ///Black Ataca si nu castiga
+                caz = 2;
+        }
+        print("Cazul este : " + caz);
         Match match = Regex.Match(board[indexStart].name, @"^(Pawn|Knight|Bishop|Rook|Queen|King)");
         if (match.Success)
         {
@@ -342,8 +371,6 @@ public class GameManager : MonoBehaviour
         {
             pieceNameTaken = match.Value;
         }
-
-        print(pieceNameTaker + " : " + pieceNameTaken + "   Aceaste peieseeeeeee");
 
         if (caz == 3)
         {

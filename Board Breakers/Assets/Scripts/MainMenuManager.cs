@@ -8,7 +8,7 @@ public class MainMenuManager : MonoBehaviour
 {
     private static MainMenuManager instance;
 
-    [SerializeField] private GameObject menuScreem, lobbyscreen , soundScreen , lobbyJoin, chat;
+    [SerializeField] private GameObject menuScreem, lobbyscreen , soundScreen , lobbyJoin, chat , lobbies;
     [SerializeField] private TMP_InputField lobbyInput;
 
     [SerializeField] private Button startGameButton;
@@ -41,7 +41,14 @@ public class MainMenuManager : MonoBehaviour
         soundScreen.SetActive(false);
         lobbyJoin.SetActive(false);
         chat.SetActive(false);
+        lobbies.SetActive(false);
         
+    }
+
+    public void openLobies()
+    {
+        closeAllScreens();
+        lobbies.SetActive(true);
     }
 
     public void OpenMainMenu()
@@ -77,6 +84,8 @@ public class MainMenuManager : MonoBehaviour
     {
         OpenMainMenu();
         BootstrapManager.leaveLobby();
+        if(PlayerHost.isHost && PlayerHost.isPublic)
+            LobbyManagerFirebase.LeaveLobby();
         
     }
 
@@ -100,6 +109,9 @@ public class MainMenuManager : MonoBehaviour
         string[] scenesToClose = new string[] { "MainMenu" };
 
         BootStrapNetworkManager.changeNetworkScene("MainGame", scenesToClose);
+
+        if (PlayerHost.isHost && PlayerHost.isPublic)
+            LobbyManagerFirebase.LeaveLobby();
     } 
 
     public void soundMenu()

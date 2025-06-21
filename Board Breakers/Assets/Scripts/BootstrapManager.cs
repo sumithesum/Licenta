@@ -38,7 +38,7 @@ public class BootstrapManager : MonoBehaviour
 
     public static void CreateLobby()
     {
-        SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 2);
+        SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypePublic, 2);
         //OnLobbycreated si onLobbyEnter vor rula instant dupa asta (desigur ca din cauza ca faci un lobby)
     }
 
@@ -70,6 +70,7 @@ public class BootstrapManager : MonoBehaviour
     {
         currentLobbyId = callback.m_ulSteamIDLobby;
 
+        PlayerHost.lobbyId = currentLobbyId.ToString();
         CSteamID lobbyOwner = SteamMatchmaking.GetLobbyOwner(new CSteamID(currentLobbyId));
         PlayerHost.isHost = (lobbyOwner == SteamUser.GetSteamID());
         PlayerHost.username = SteamFriends.GetPersonaName();
