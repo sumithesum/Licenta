@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -6,7 +6,7 @@ using static Utils;
 
 public class GameManager : MonoBehaviour
 {
-
+    public static int? enPassantTargetIndex = null;
     public static bool isWhite = true;
 
     public static bool isWhiteStatic = true;
@@ -156,19 +156,19 @@ public class GameManager : MonoBehaviour
 
         ///King White
 
-        InstanceCreator(3, PiecesTypes.King, true);
+        InstanceCreator(4, PiecesTypes.King, true);
 
         ///King Black
 
-        InstanceCreator(59, PiecesTypes.King, false);
+        InstanceCreator(60, PiecesTypes.King, false);
 
         ///Queen White
 
-        InstanceCreator(4, PiecesTypes.Queen, true);
+        InstanceCreator(3, PiecesTypes.Queen, true);
 
         ///Queen Black
 
-        InstanceCreator(60, PiecesTypes.Queen, false);
+        InstanceCreator(59, PiecesTypes.Queen, false);
 
 
         //foreach(GameObject piece in board)
@@ -259,6 +259,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public static void updateGraphics()
+    {
+        for(int i = 0; i < 64; i++ )
+            if (board[i].gameObject.name != "Null")
+            {
+                int x = i % 8;
+                int y = i / 8;
+                Vector3 endPos = new Vector3(x + 0.5f, y + 0.5f, -1); 
+
+                board[i].transform.position = endPos;
+            }
+    }
+
     public static void close()
     {
         print("closing");
@@ -298,6 +311,52 @@ public class GameManager : MonoBehaviour
             board[indexStart] = board[indexEnd];
             board[indexEnd] = aux;
         }
+        else if(movement == 3)
+        {
+            
+            //regele
+            board[indexStart].GetComponent<Pices>().data.firstMove = false;
+            GameObject aux = board[indexStart];
+            board[indexStart] = board[indexEnd];
+            board[indexEnd] = aux;
+
+            //turnul
+            int rookStart = indexStart + 3;
+            int rookEnd = indexStart + 1;
+
+            board[rookStart].GetComponent<Pices>().data.firstMove = false;
+            aux = board[rookStart];
+            board[rookStart] = board[rookEnd];
+            board[rookEnd] = aux;
+
+            float x = board[indexStart].transform.position.x - 1;
+            Vector3 pozEnd = new Vector3(x, board[indexStart].transform.position.y, -1);
+            board[rookStart].gameObject.transform.position = pozEnd;
+        }
+        else if (movement == 4)
+        {
+
+            //regele
+            board[indexStart].GetComponent<Pices>().data.firstMove = false;
+            GameObject aux = board[indexStart];
+            board[indexStart] = board[indexEnd];
+            board[indexEnd] = aux;
+
+            //turnul
+            int rookStart = indexStart - 4;
+            int rookEnd = indexStart - 1;
+            board[rookStart].GetComponent<Pices>().data.firstMove = false;
+            aux = board[rookStart];
+            board[rookStart] = board[rookEnd];
+            board[rookEnd] = aux;
+
+            float x = board[indexStart].transform.position.x + 1;
+            Vector3 pozEnd = new Vector3(x, board[indexStart].transform.position.y, -1);
+            board[rookStart].gameObject.transform.position = pozEnd;
+        }
+        updateGraphics();
+
+
     }
 
 
@@ -399,8 +458,8 @@ public class GameManager : MonoBehaviour
         {
             board[indexStart].transform.position = LastTakerPos;
         }
-        
 
+        updateGraphics();
         //Destroy(board[indexEnd]);
         //board[indexEnd] = board[indexStart];
         //board[indexStart] = new GameObject("Null");
@@ -417,7 +476,8 @@ public class GameManager : MonoBehaviour
 
         if (recived)
         {
-            board[indexStart].gameObject.transform.position = endPos;
+            board[indexStart].gameObject.transform.position =
+                new Vector3((int)endPos.x + 0.5f, (int)endPos.y + 0.5f, -1);
         }
 
         ///Ok now the logic for movement of evry piece (and the atack logic) 
@@ -438,7 +498,7 @@ public class GameManager : MonoBehaviour
 
                     ///Capture Enemy
                     ///
-
+                    
 
                     if ((movement == +9 && board[indexEnd].name != "Null" && !board[indexEnd].GetComponent<Pices>().data.isWhite) ||
                         (movement == +7 && board[indexEnd].name != "Null" && !board[indexEnd].GetComponent<Pices>().data.isWhite))
@@ -447,7 +507,12 @@ public class GameManager : MonoBehaviour
 
                         return 2;
                     }
+                    if ((movement == +7 || movement == +9) && board[indexEnd].name == "Null" && enPassantTargetIndex == indexEnd)
+                    {
 
+                        Destroy(board[indexEnd - 8]);
+                        return 1;
+                    }
 
 
                     bool isAPiece = false;
@@ -481,8 +546,8 @@ public class GameManager : MonoBehaviour
                             return 0;
                         }
 
-                  
 
+                        enPassantTargetIndex = indexStart + 8;
                         return 1;
 
                     }
@@ -505,7 +570,7 @@ public class GameManager : MonoBehaviour
 
                     ///#fara ampersant for now
                     ///Is an enemy on the path
-
+                   
 
                     if ((movement == -9 && board[indexEnd].name != "Null" && board[indexEnd].GetComponent<Pices>().data.isWhite) ||
                        (movement == -7 && board[indexEnd].name != "Null" && board[indexEnd].GetComponent<Pices>().data.isWhite))
@@ -515,7 +580,12 @@ public class GameManager : MonoBehaviour
                         return 2;
                     }
 
+                    if ((movement == -7 || movement == -9) && board[indexEnd].name == "Null" && enPassantTargetIndex == indexEnd)
+                    {
 
+                        Destroy(board[indexEnd + 8]);
+                        return 1;
+                    }
 
                     bool isAnEnemy = false;
 
@@ -547,7 +617,7 @@ public class GameManager : MonoBehaviour
 
                             return 0;
                         }
-                       
+                        enPassantTargetIndex = indexStart - 8;
 
                         return 1;
 
@@ -754,7 +824,38 @@ public class GameManager : MonoBehaviour
             case "KingWhite(Clone)":
             case "KingBlack(Clone)":
                 {
+                    bool isWhite = board[indexStart].GetComponent<Pices>().data.isWhite;
+                    bool firstMove = board[indexStart].GetComponent<Pices>().data.firstMove;
 
+                    // Rocada scurta (king-side castling)
+                    if (firstMove && (movement == 2))
+                    {
+                        int rookIndex = indexStart + 3;
+                        if (board[rookIndex].name.Contains("Rook") &&
+                            board[rookIndex].GetComponent<Pices>().data.firstMove &&
+                            board[indexStart + 1].name == "Null" &&
+                            board[indexStart + 2].name == "Null")
+                        {
+                            
+                           
+                            return 3;
+                        }
+                    }
+
+                    
+                    if (firstMove && (movement == -2))
+                    {
+                        int rookIndex = indexStart - 4;
+                        if (board[rookIndex].name.Contains("Rook") &&
+                            board[rookIndex].GetComponent<Pices>().data.firstMove &&
+                            board[indexStart - 1].name == "Null" &&
+                            board[indexStart - 2].name == "Null" &&
+                            board[indexStart - 3].name == "Null")
+                        {
+                           
+                            return 4;
+                        }
+                    }
                     if (movement == 1 || movement == -1 || movement == 8 || movement == -8 || movement == 7 || movement == -7 || movement == 9 || movement == -9)
                     {
                         if (board[indexEnd].name == "Null")
@@ -780,7 +881,6 @@ public class GameManager : MonoBehaviour
         return 0;
     }
 
-    // In loc de check/checkmate este daca 'capturezi' regele inamic (minigame idk how hard)
 
     
 
