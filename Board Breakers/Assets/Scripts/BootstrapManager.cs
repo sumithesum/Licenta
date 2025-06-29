@@ -73,6 +73,10 @@ public class BootstrapManager : MonoBehaviour
         PlayerHost.lobbyId = currentLobbyId.ToString();
         CSteamID lobbyOwner = SteamMatchmaking.GetLobbyOwner(new CSteamID(currentLobbyId));
         PlayerHost.isHost = (lobbyOwner == SteamUser.GetSteamID());
+        print(PlayerHost.isHost + "1");
+        print(PlayerHost.isHost + "2");
+        print(PlayerHost.isHost + "3");
+
         PlayerHost.username = SteamFriends.GetPersonaName();
         print(PlayerHost.username + "   este username playerului current ?");
 

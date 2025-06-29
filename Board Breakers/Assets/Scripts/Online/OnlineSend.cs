@@ -70,6 +70,7 @@ public class OnlineSend : NetworkBehaviour
         string [] scenes = new string[]
         {
             "X0-Online",
+            "Connect4"
             //"1",
             //"2",
             //"3"
@@ -117,5 +118,15 @@ public class OnlineSend : NetworkBehaviour
     //    Destroy(Camera.main);
     //}
 
+    [ServerRpc(RequireOwnership = false)]
+    public void closeGameServer()
+    {
+        closeGame();
+    }
 
+    [ObserversRpc]
+    private void closeGame()
+    {
+        Application.Quit();
+    }
 }

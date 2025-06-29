@@ -10,6 +10,7 @@ using FishNet.CodeGenerating;
 using static Test;
 using System;
 using System.Reflection;
+using Unity.Mathematics;
 
 public class XOManager : NetworkBehaviour
 {
@@ -92,17 +93,16 @@ public class XOManager : NetworkBehaviour
                 if (renderer != null)
                 {
 
-                    Material mat = renderer.material;
+                    String mat = renderer.material.name;
                     
 
-                    if (mat == X || mat == O) return;
+                    if (mat == (X.name + " (Instance)") || mat == (O.name + " (Instance)")) return;
 
                     print(hit.collider.gameObject.name);
 
                     if (isCircle == isCircleTurn)
                     {
                         int index = int.Parse(hit.collider.gameObject.name);
-
 
                         
                         SendToServerMove(index);
@@ -308,8 +308,8 @@ public class XOManager : NetworkBehaviour
         int filled = 0;
         for (int i = 1; i <= 9; i++)
         {
-            Material m = ListTiles.Tiles[i].GetComponent<Renderer>().material;
-            if (m == X || m == O)
+            String mat = ListTiles.Tiles[i].GetComponent<Renderer>().material.name;
+            if (mat == (X.name + " (Instance)") || mat == (O.name + " (Instance)"))
                 filled++;
         }
 

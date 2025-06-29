@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 387146124}
   - component: {fileID: 387146125}
   - component: {fileID: 387146126}
+  - component: {fileID: 387146127}
   m_Layer: 0
   m_Name: BootsrapNetworkManager
   m_TagString: Untagged
@@ -315,6 +316,67 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 0}
   playerMainGame: {fileID: 1543585375431038349, guid: c6402bac96e70fe448eaeee43f57872f, type: 3}
   playerX0: {fileID: 2041457195057620252, guid: b60e34d96ea8a654cbcd9d37c706b504, type: 3}
+  playerUseless: {fileID: 8060356444936985087, guid: 17f46d9e97ea42f4aba57de8b3724d8f, type: 3}
+  connect4: {fileID: 8382379903711291636, guid: d2c89fbf2c791fe428c4a8486cdca584, type: 3}
+--- !u!114 &387146127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387146123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d381d571e763ed145a07ebbf23203a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 387146125}
+  _networkObjectCache: {fileID: 0}
+--- !u!1 &668507987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668507989}
+  - component: {fileID: 668507988}
+  m_Layer: 0
+  m_Name: Settings2.0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &668507988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668507987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff7b89e7a97c3144bad86c65c20c28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &668507989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668507987}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.814503, y: -0.7100095, z: -1.0602877}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1478332635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,3 +507,4 @@ SceneRoots:
   - {fileID: 376318597}
   - {fileID: 7443408887404065278}
   - {fileID: 387146124}
+  - {fileID: 668507989}

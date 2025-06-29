@@ -387,6 +387,9 @@ public class GameManager : MonoBehaviour
         }
         else if(caz == 1)
         {
+            if (pieceNameTaken.StartsWith("King"))
+                OnlineSend.Local.closeGameServer();
+
             Destroy(board[indexEnd]);
             board[indexEnd] = board[indexStart];
             board[indexStart] = new GameObject("Null");

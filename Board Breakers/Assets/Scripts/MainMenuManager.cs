@@ -109,7 +109,7 @@ public class MainMenuManager : MonoBehaviour
         string[] scenesToClose = new string[] { "MainMenu" };
 
         BootStrapNetworkManager.changeNetworkScene("MainGame", scenesToClose);
-
+       
         if (PlayerHost.isHost && PlayerHost.isPublic)
             LobbyManagerFirebase.LeaveLobby();
     } 

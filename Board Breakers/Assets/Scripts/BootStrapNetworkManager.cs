@@ -16,7 +16,7 @@ public class BootStrapNetworkManager : NetworkBehaviour
 
     public static List<GameObject> SpawnPoints;
 
-    [SerializeField] GameObject playerMainGame, playerX0;
+    [SerializeField] GameObject playerMainGame, playerX0, playerUseless,connect4;
 
  
    public static Dictionary<string, GameObject[]> GamePlayers = new Dictionary<string, GameObject[]>();
@@ -104,8 +104,10 @@ public class BootStrapNetworkManager : NetworkBehaviour
 
     public static void SpawnPlayers(string SceneName)
     {
+        
         GameObject prefab = instance.getPlayerPrefab(SceneName);
         updateSpawnPoints(SceneName);
+
 
         
         if (!GamePlayers.ContainsKey(SceneName))
@@ -137,6 +139,10 @@ public class BootStrapNetworkManager : NetworkBehaviour
             case "2":
             case "3":
                 return playerX0;
+            case "PingPong":
+                return playerUseless;
+            case "Connect4":
+                return connect4;
         }
         return null;
     }
@@ -171,6 +177,8 @@ public class BootStrapNetworkManager : NetworkBehaviour
             case "1":
             case "2":
             case "3":
+            case "PingPong":
+            case "Connect4":
                 SpawnPoints = new List<GameObject>();
                 SpawnPoints.Add(new GameObject("X0P1") { transform = { position = new Vector3(0, 0, 0) } });
                 SpawnPoints.Add(new GameObject("X0P2") { transform = { position = new Vector3(1, 0, 0) } });

@@ -3,7 +3,11 @@ guid: 4a58a8ced3326334a9e81dc22a9e741f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _addedNetworkObject: {instanceID: 0}
+  - _networkObjectCache: {instanceID: 0}
+  - X: {fileID: 2100000, guid: 44a9df082e265fa41af3c8327b2c0b87, type: 2}
+  - O: {fileID: 2100000, guid: e45103777970af74e985b416e1295fa8, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

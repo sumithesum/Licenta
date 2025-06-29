@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/3.unity
     guid: 9de92863881a93441b8ae563dbc70c6c
+  - enabled: 1
+    path: Assets/Scenes/PingPong.unity
+    guid: 427498d87f2a8134b93a4ebf1afc641c
+  - enabled: 1
+    path: Assets/Scenes/Connect4.unity
+    guid: f342c82a284bee448ab8d4048fd2293f
   m_configObjects: {}
