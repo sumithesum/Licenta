@@ -128,6 +128,7 @@ public class Connect4Manager : NetworkBehaviour
                     
                     if (checkIfTurn() && !isGameFinished)
                     {
+                       
                         int linie = isSpace(coloana);
                         print(linie);
                         if (linie != -1)
@@ -325,6 +326,7 @@ public class Connect4Manager : NetworkBehaviour
     private void changeMaterial(int linie,int coloana , bool isHost)
     {
         updateLinii();
+        SoundManager.instance.PlaySoundFX(1, this.gameObject.transform);
         print("[Client]: Am primit : " + linie + " : " + coloana + " : " + isHost);
         if (isHost)
             linii[linie].copii[coloana].GetComponent<Renderer>().material = Blue;

@@ -103,7 +103,7 @@ public class XOManager : NetworkBehaviour
                     if (isCircle == isCircleTurn)
                     {
                         int index = int.Parse(hit.collider.gameObject.name);
-
+                        
                         
                         SendToServerMove(index);
                   
@@ -335,7 +335,7 @@ public class XOManager : NetworkBehaviour
     {
         
         ListTiles.Tiles[index].GetComponent<Renderer>().material = isCircle ? O : X;
-        
+        SoundManager.instance.PlaySoundFX(2, this.gameObject.transform);
         if (isCircleTurn)
             isCircleTurn = false;
         else

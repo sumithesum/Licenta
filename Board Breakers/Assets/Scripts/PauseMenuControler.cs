@@ -42,7 +42,10 @@ public class PauseMenuControler : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        Application.Quit();
+        OnlineSend.Local.closeGameServer();
+        Main.gameObject.SetActive(false);
+        Panel.gameObject.SetActive(false);
+        //Application.Quit();
     }
 
     public void ReturnToGame()

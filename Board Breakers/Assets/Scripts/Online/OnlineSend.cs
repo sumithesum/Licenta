@@ -40,31 +40,35 @@ public class OnlineSend : NetworkBehaviour
     {
         Debug.Log($"[Server] Received move: {startPos} -> {endPos}");
 
-
-        SendMoveToOtherClient(startPos, endPos, this);
+        changeT();
+        SendMoveToOtherClient(startPos, endPos);
     }
 
-    [ObserversRpc]
-    private void SendMoveToOtherClient(Vector3 startPos, Vector3 endPos, OnlineSend script)
+    [ObserversRpc(ExcludeOwner = true)]
+    private void SendMoveToOtherClient(Vector3 startPos, Vector3 endPos)
     {
 
-        changeTurn();
+       
 
         print("is White Turn ?  : " +isWhiteStatic);
         int miscare = Movement(startPos, endPos, true);
+        print(miscare);
         ActualMovement(startPos, endPos, miscare);
-        
+   
         if (miscare == 2)
             {
-                print("Sa luat o piesa");
-            if(IsHostInitialized)
+                print("Host-ul ar trebui sa schimbe");
                 StartCoroutine(WaitAndChangeScene(chooseRandomScene()));
-
+     
         }
 
 
     }
-
+    [ObserversRpc]
+    private void changeT()
+    {
+        changeTurn();
+    }
     public string chooseRandomScene()
     {
         string [] scenes = new string[]
@@ -127,6 +131,9 @@ public class OnlineSend : NetworkBehaviour
     [ObserversRpc]
     private void closeGame()
     {
+
         Application.Quit();
+        //destroyBoards();
+        //BootStrapNetworkManager.returnToMainMenu();
     }
 }

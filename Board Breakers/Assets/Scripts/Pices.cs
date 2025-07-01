@@ -41,10 +41,10 @@ public class Pices : NetworkBehaviour
 
     private void OnMouseUp()
     {
-        StartCoroutine( Move(false));
+        StartCoroutine( Move());
     }
 
-    public IEnumerator Move(bool recived)
+    public IEnumerator Move()
     {
 
   
@@ -71,7 +71,7 @@ public class Pices : NetworkBehaviour
             this.transform.position.y <= endPosition.y && this.transform.position.y >= (startPosition.y - 0.5f))
             )
             {
-                int movement = Movement(initialPos, this.transform.position, recived);
+                int movement = Movement(initialPos, this.transform.position, false);
 
                 if (movement == 0)
                 {
@@ -80,12 +80,12 @@ public class Pices : NetworkBehaviour
                 }
                 else
                 {
-                    ActualMovement(initialPos, this.transform.position, movement);
-                    if (!recived)
-                    {
-                        OnlineSend.Send(initialPos, this.transform.position);
 
-                    }
+                    OnlineSend.Send(initialPos, this.transform.position);
+                    ActualMovement(initialPos, this.transform.position, movement);
+                  
+
+                    
 
                     this.transform.position = new Vector3((int)this.transform.position.x + 0.5f, (int)this.transform.position.y + 0.5f, -1);
 

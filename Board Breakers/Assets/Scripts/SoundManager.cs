@@ -7,23 +7,27 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     [SerializeField] private AudioSource soundFXObject;
-
+    [SerializeField] private AudioClip[] sfx; 
     private void Awake()
     {
         if (instance == null)
             instance = this;
-
-        DontDestroyOnLoad(this);
+        else
+        {
+            Destroy(this);
+            return;
+        }
+            DontDestroyOnLoad(this);
     }
 
-    public void PlaySoundFX(AudioClip audioClip , Transform transform , float volume)
+    public void PlaySoundFX(int i , Transform transform )
     {
 
         AudioSource audioSource = Instantiate(soundFXObject, transform.position, Quaternion.identity);
 
-        audioSource.clip = audioClip;
+        audioSource.clip = sfx[i];
 
-        audioSource.volume = volume;
+        
 
         audioSource.Play();
 

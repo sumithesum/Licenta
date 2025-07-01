@@ -15,10 +15,15 @@ public class ChatManager : MonoBehaviour
 
     // Listă care ține evidența mesajelor afișate
     private List<GameObject> displayedMessages = new List<GameObject>();
+    public static ChatManager instance;
 
     private void Start()
     {
-        DontDestroyOnLoad(this);   
+      
+            instance = this;
+            DontDestroyOnLoad(this);
+       
+       
     }
 
     private void OnEnable()
@@ -31,8 +36,16 @@ public class ChatManager : MonoBehaviour
 
     private void OnDisable()
     {
-        InstanceFinder.ClientManager.UnregisterBroadcast<Message>(onMessageReceivedWithChannel);
-        InstanceFinder.ServerManager.UnregisterBroadcast<Message>(onClientMessageReceivedWithChannel);
+        if (instance != null)
+        {
+            InstanceFinder.ClientManager.UnregisterBroadcast<Message>(onMessageReceivedWithChannel);
+            InstanceFinder.ServerManager.UnregisterBroadcast<Message>(onClientMessageReceivedWithChannel);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
     }
 
     private void Update()

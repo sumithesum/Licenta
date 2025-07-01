@@ -392,6 +392,7 @@
 "Assets/Gamebuild/Scripts/GameBuildConfig.cs"
 "Assets/Gamebuild/Scripts/GameBuildEditorWindow.cs"
 "Assets/Linie.cs"
+"Assets/restart.cs"
 "Assets/Scripts/BallManagement.cs"
 "Assets/Scripts/BilaControll.cs"
 "Assets/Scripts/BootstrapManager.cs"

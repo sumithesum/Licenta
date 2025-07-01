@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using FishNet;
 using System.Data;
+using UnityEngine.UI;
 
 
 public class BootStrapNetworkManager : NetworkBehaviour
@@ -48,6 +49,19 @@ public class BootStrapNetworkManager : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
+    }
+
+    public static void returnToMainMenu()
+    {
+        string[] scenesToClose =
+        {
+            "Connect4",
+            "X0-Online",
+            "MainGame",
+            
+            
+        };
+        changeNetworkScene("Show", scenesToClose);
     }
 
     public static void changeNetworkScene(string sceneName, string[] scenesToClose)
@@ -104,6 +118,8 @@ public class BootStrapNetworkManager : NetworkBehaviour
 
     public static void SpawnPlayers(string SceneName)
     {
+        if (SceneName == "MainMenu" || SceneName == "Show")
+            return;
         
         GameObject prefab = instance.getPlayerPrefab(SceneName);
         updateSpawnPoints(SceneName);

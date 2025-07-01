@@ -9,10 +9,13 @@ public class BootstrapManager : MonoBehaviour
 {
     private static BootstrapManager instance;
 
+
     public void Awake()
     {
         instance = this;
     }
+
+
 
     [SerializeField] private string menuName = "MainMenu";
     [SerializeField] private NetworkManager _netmanager;

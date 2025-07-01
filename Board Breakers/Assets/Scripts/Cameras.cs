@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cameras : MonoBehaviour
 {
-    [SerializeField] public GameObject Camera;
+    [SerializeField] public GameObject CameraX;
 
     public static Vector3 cameraMain = new Vector3(4f, 4f, -2f);
     
@@ -17,6 +17,15 @@ public class Cameras : MonoBehaviour
 
     public GameObject spawnCameraMain()
     {
-        return Instantiate(Camera, cameraMain, Quaternion.identity);
+        return Instantiate(CameraX, cameraMain, Quaternion.identity);
+    }
+
+    private void Update()
+    {
+        //if (Camera.main == null)
+        //{
+        //    //spawnCameraMain();
+        //    print("Spawned");
+        //}
     }
 }

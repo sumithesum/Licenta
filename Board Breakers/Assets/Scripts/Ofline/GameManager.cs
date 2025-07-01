@@ -1,6 +1,8 @@
 ﻿
+using Steamworks;
 using System;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Utils;
 
@@ -28,6 +30,8 @@ public class GameManager : MonoBehaviour
     public static Vector3  LastTakenPos;
 
     public static bool inMinigame = false;
+
+    public static GameManager instance;
 
     private bool createEmptyMap()
     {
@@ -214,7 +218,7 @@ public class GameManager : MonoBehaviour
         blackPrefab = Resources.Load<GameObject>("Tiles/Tile_Green");
         plane = Resources.Load<GameObject>("Art/Plane");
 
-
+        instance = this;
         if (whitePrefab == null)
         {
             Debug.LogError("White prefab not found in Resources/Tiles/Tile_White");
@@ -293,6 +297,8 @@ public class GameManager : MonoBehaviour
         int indexStart = ((int)startPos.y) * 8 + ((int)startPos.x);
         int indexEnd = ((int)endPos.y) * 8 + ((int)endPos.x);
 
+        SoundManager.instance.PlaySoundFX(0, Camera.main.gameObject.transform);
+
         if (movement == 2)
         {
             close();
@@ -354,6 +360,18 @@ public class GameManager : MonoBehaviour
             Vector3 pozEnd = new Vector3(x, board[indexStart].transform.position.y, -1);
             board[rookStart].gameObject.transform.position = pozEnd;
         }
+        else if (movement == 5)
+        {
+            close();
+            
+
+            LastTakerPos = startPos;
+            LastTakenPos = board[indexEnd - 8].transform.position;
+
+            inMinigame = true;
+            Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        }
         updateGraphics();
 
 
@@ -372,6 +390,17 @@ public class GameManager : MonoBehaviour
             case "Knig": return 10;
         }
         return -1;
+    }
+
+    public static void destroyBoards()
+    {
+        for (int i = 0; i < 64; i++)
+        {
+            Destroy(board[i]);
+            Destroy(tiles[i]);
+        }
+        Destroy(instance.gameObject);
+        Destroy(Camera.main.gameObject);
     }
 
     ///E functioanl cu bugguri ?
@@ -456,6 +485,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+
             board[indexStart].transform.position = LastTakerPos;
         }
 
@@ -510,8 +540,7 @@ public class GameManager : MonoBehaviour
                     if ((movement == +7 || movement == +9) && board[indexEnd].name == "Null" && enPassantTargetIndex == indexEnd)
                     {
 
-                        Destroy(board[indexEnd - 8]);
-                        return 1;
+                        return 5;
                     }
 
 
