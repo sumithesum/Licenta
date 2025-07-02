@@ -34,7 +34,10 @@ public class BootstrapManager : MonoBehaviour
         LobbyEnter = Callback<LobbyEnter_t>.Create(onLobbyEnter);
         
     }
-
+    public static void f()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+    }
     public void GoToMenu() {
         SceneManager.LoadScene(menuName, LoadSceneMode.Additive);
     }

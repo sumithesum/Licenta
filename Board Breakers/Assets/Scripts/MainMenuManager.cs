@@ -40,6 +40,7 @@ public class MainMenuManager : MonoBehaviour
         lobbyscreen.SetActive(false);
         soundScreen.SetActive(false);
         lobbyJoin.SetActive(false);
+        if(chat != null)
         chat.SetActive(false);
         lobbies.SetActive(false);
         
@@ -71,7 +72,8 @@ public class MainMenuManager : MonoBehaviour
     {
         closeAllScreens();
         lobbyscreen.SetActive(true);
-        chat.SetActive(true);
+        if (chat != null)
+            chat.SetActive(true);
     }
     
     public void openLobbyJoin()
@@ -106,7 +108,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void startGame()
     {
-        string[] scenesToClose = new string[] { "MainMenu" };
+        string[] scenesToClose = new string[] { "MainMenu","Menu2" };
 
         BootStrapNetworkManager.changeNetworkScene("MainGame", scenesToClose);
        

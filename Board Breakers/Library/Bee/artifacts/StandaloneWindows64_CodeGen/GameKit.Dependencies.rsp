@@ -428,7 +428,7 @@
 "Assets/FishNet/Runtime/Plugins/GameKit/Dependencies/Utilities/WeightedRandom.cs"
 -langversion:9.0
 /deterministic
-/optimize-
+/optimize+
 /debug:portable
 /nologo
 /RuntimeMetadataVersion:v4.0.30319

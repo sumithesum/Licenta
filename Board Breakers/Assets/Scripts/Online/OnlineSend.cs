@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static GameManager;
 using static Utils;
+
 
 public class OnlineSend : NetworkBehaviour
 {
@@ -132,8 +134,11 @@ public class OnlineSend : NetworkBehaviour
     private void closeGame()
     {
 
-        Application.Quit();
-        //destroyBoards();
-        //BootStrapNetworkManager.returnToMainMenu();
+        
+        destroyBoards();
+        BootstrapManager.leaveLobby();
+        BootstrapManager.f();
+        GameManager.isWhiteStatic = true;
+        BootStrapNetworkManager.returnToMainMenu();
     }
 }

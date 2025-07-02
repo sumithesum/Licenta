@@ -9,6 +9,7 @@ using System.Collections;
 using FishNet;
 using System.Data;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 
 public class BootStrapNetworkManager : NetworkBehaviour
@@ -44,7 +45,15 @@ public class BootStrapNetworkManager : NetworkBehaviour
 
     public void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            
+        }
+        else
+        {
+            Destroy(this.gameObject); 
+        }
     }
     public override void OnStartServer()
     {
@@ -53,17 +62,32 @@ public class BootStrapNetworkManager : NetworkBehaviour
 
     public static void returnToMainMenu()
     {
+
         string[] scenesToClose =
-        {
+      {
             "Connect4",
             "X0-Online",
             "MainGame",
-            
-            
-        };
-        changeNetworkScene("Show", scenesToClose);
-    }
 
+
+        };
+        changeNetworkScene("", scenesToClose);
+    }
+    public IEnumerator waitS(float time)
+    {
+        print("1");
+        yield return new WaitForSeconds(time);
+        print("2");
+        string[] scenesToClose =
+       {
+            "Connect4",
+            "X0-Online",
+            "MainGame",
+
+
+        };
+        changeNetworkScene("", scenesToClose);
+    }
     public static void changeNetworkScene(string sceneName, string[] scenesToClose)
     {
         instance.CloseScenes(scenesToClose);
@@ -158,6 +182,7 @@ public class BootStrapNetworkManager : NetworkBehaviour
             case "PingPong":
                 return playerUseless;
             case "Connect4":
+            case "Menu2":
                 return connect4;
         }
         return null;
@@ -195,6 +220,7 @@ public class BootStrapNetworkManager : NetworkBehaviour
             case "3":
             case "PingPong":
             case "Connect4":
+            case "Menu2":
                 SpawnPoints = new List<GameObject>();
                 SpawnPoints.Add(new GameObject("X0P1") { transform = { position = new Vector3(0, 0, 0) } });
                 SpawnPoints.Add(new GameObject("X0P2") { transform = { position = new Vector3(1, 0, 0) } });

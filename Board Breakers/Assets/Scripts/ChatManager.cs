@@ -13,16 +13,23 @@ public class ChatManager : MonoBehaviour
     public TMP_InputField playerMessage;
     public GameObject msgInput;
 
-    // Listă care ține evidența mesajelor afișate
+    
     private List<GameObject> displayedMessages = new List<GameObject>();
     public static ChatManager instance;
 
     private void Start()
     {
-      
+        if (instance == null)
+        {
+
             instance = this;
             DontDestroyOnLoad(this);
-       
+        }
+        else
+        {
+            
+            Destroy(this.gameObject);
+        }
        
     }
 
@@ -75,7 +82,7 @@ public class ChatManager : MonoBehaviour
 
         playerMessage.text = "";
 
-        // Trimite DOAR de pe client. Serverul îl va retransmite.
+      
         if (InstanceFinder.IsClient)
             InstanceFinder.ClientManager.Broadcast(msg);
     }
@@ -95,27 +102,27 @@ public class ChatManager : MonoBehaviour
             InstanceFinder.ClientManager.Broadcast(msg);
     }
 
-    // Server primește mesaj de la client
+  
     private void onClientMessageReceivedWithChannel(NetworkConnection conn, Message msg, FishNet.Transporting.Channel channel)
     {
-        // Server îl transmite tuturor
+        
         InstanceFinder.ServerManager.Broadcast(msg);
     }
 
-    // Client primește mesaj de la server
+
     private void onMessageReceivedWithChannel(Message msg, FishNet.Transporting.Channel channel)
     {
         DisplayMessage(msg);
     }
 
-    // Afișează un mesaj nou în UI și menține maxim 5
+
     private void DisplayMessage(Message msg)
     {
         GameObject finalMsg = Instantiate(msgElement, chatHolder);
         finalMsg.GetComponent<TextMeshProUGUI>().text = $"{msg.username}: {msg.message}";
         displayedMessages.Add(finalMsg);
 
-        // Dacă avem mai mult de 5 mesaje, ștergem primul
+    
         if (displayedMessages.Count > 5)
         {
             Destroy(displayedMessages[0]);

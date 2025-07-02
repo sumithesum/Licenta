@@ -7,7 +7,7 @@ using UnityEngine;
 public class PauseMenuControler : MonoBehaviour
 {
 
-    public static string[] AllSecenes = { "1","2","3","MainGame","X0-Online" }; 
+    
 
     [SerializeField] public GameObject Main, Sound , Panel;
 
@@ -32,7 +32,11 @@ public class PauseMenuControler : MonoBehaviour
             ///
             Main.gameObject.SetActive(!Main.gameObject.activeSelf);
             Panel.gameObject.SetActive(!Panel.gameObject.activeSelf);
-
+            if (!Panel.gameObject.activeSelf)
+            {
+                Sound.gameObject.SetActive(false);
+                Main.gameObject.SetActive(false);
+            }
 
             //Vector3 aux = Camera.main.transform.position;
             //Camera.main.transform.position = orginalpos;
@@ -42,9 +46,11 @@ public class PauseMenuControler : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        OnlineSend.Local.closeGameServer();
         Main.gameObject.SetActive(false);
         Panel.gameObject.SetActive(false);
+        Sound.gameObject.SetActive(false);
+        OnlineSend.Local.closeGameServer();
+        
         //Application.Quit();
     }
 

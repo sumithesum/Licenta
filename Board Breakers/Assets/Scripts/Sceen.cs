@@ -7,8 +7,8 @@ public class Sceen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Screen.fullScreenMode = FullScreenMode.FullScreenWindow; // sau Exclusive
-        //Screen.fullScreen = true;
+       Screen.fullScreenMode = FullScreenMode.FullScreenWindow; // sau Exclusive
+        Screen.fullScreen = true;
     }
 
 

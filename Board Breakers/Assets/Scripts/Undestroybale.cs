@@ -5,9 +5,18 @@ using UnityEngine;
 public class Undestroybale : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static Undestroybale inst;
     void Start()
     {
-        DontDestroyOnLoad(this);
+        if (inst == null)
+        {
+            inst = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }

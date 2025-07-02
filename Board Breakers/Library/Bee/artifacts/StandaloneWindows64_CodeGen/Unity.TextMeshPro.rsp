@@ -422,7 +422,7 @@
 "Library/PackageCache/com.unity.textmeshpro@3.0.9/Scripts/Runtime/TMP_UpdateRegistery.cs"
 -langversion:9.0
 /deterministic
-/optimize-
+/optimize+
 /debug:portable
 /nologo
 /RuntimeMetadataVersion:v4.0.30319

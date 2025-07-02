@@ -515,7 +515,7 @@ public class GameManager : MonoBehaviour
             if ((board[indexStart].GetComponent<Pices>().data.isWhite != isWhiteStatic))
                 return 0;
 
-
+            
 
         switch (board[indexStart].name)
         {
@@ -537,11 +537,12 @@ public class GameManager : MonoBehaviour
 
                         return 2;
                     }
-                    if ((movement == +7 || movement == +9) && board[indexEnd].name == "Null" && enPassantTargetIndex == indexEnd)
-                    {
-
-                        return 5;
-                    }
+                    //if ((movement == +7 || movement == +9) && board[indexEnd].name == "Null" && enPassantTargetIndex == indexEnd)
+                    //{
+                    //    Destroy(board[indexEnd - 8]);
+                    //    Board[indexEnd - 8] == new GameObject();
+                    //    return 1;
+                    //}
 
 
                     bool isAPiece = false;
@@ -609,12 +610,13 @@ public class GameManager : MonoBehaviour
                         return 2;
                     }
 
-                    if ((movement == -7 || movement == -9) && board[indexEnd].name == "Null" && enPassantTargetIndex == indexEnd)
-                    {
+                    //if ((movement == -7 || movement == -9) && board[indexEnd].name == "Null" && enPassantTargetIndex == indexEnd)
+                    //{
 
-                        Destroy(board[indexEnd + 8]);
-                        return 1;
-                    }
+                    //    Destroy(board[indexEnd + 8]);
+                    //    Board[indexEnd + 8] = new GameObject();
+                    //    return 1;
+                    //}
 
                     bool isAnEnemy = false;
 
@@ -739,7 +741,7 @@ public class GameManager : MonoBehaviour
                     ///
                     ///Momenta fara logica de Castleling (cred ca o sa fie facuta la rege)
 
-                    //Verificam daca e pe diagonala.
+                    
                     if (
                         ((int)(indexStart / 8) != (int)(indexEnd / 8)) &&
                         (indexStart % 8 != indexEnd % 8)
@@ -747,7 +749,7 @@ public class GameManager : MonoBehaviour
                         return 0;
 
 
-                    //Checks if the piece is moving vertycaly
+                 
                     if(movement % 8 == 0)
                     {
                         if (movement > 0)
