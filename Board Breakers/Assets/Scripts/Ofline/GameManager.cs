@@ -1,6 +1,8 @@
 ﻿
 using Steamworks;
 using System;
+using System.Collections;
+using System.IO;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -292,7 +294,7 @@ public class GameManager : MonoBehaviour
             piese.SetActive(true);
     }
 
-    public static void ActualMovement(Vector3 startPos, Vector3 endPos , int movement)
+    public static void ActualMovement(Vector3 startPos, Vector3 endPos , int movement, bool recived,PiecesTypes piecesTypes)
     {
         int indexStart = ((int)startPos.y) * 8 + ((int)startPos.x);
         int indexEnd = ((int)endPos.y) * 8 + ((int)endPos.x);
@@ -372,11 +374,39 @@ public class GameManager : MonoBehaviour
             Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         }
-        updateGraphics();
+        else if(movement == 10)
+        {
+            board[indexStart].GetComponent<Pices>().data.firstMove = false;
+            GameObject aux = board[indexStart];
+            board[indexStart] = board[indexEnd];
+            board[indexEnd] = aux;
 
-
+            MeniuSchimbare.inst.piece = board[indexEnd];
+            MeniuSchimbare.isMade = false;
+            if (!recived)
+            {
+                MeniuSchimbare.inst.show();
+                instance.StartCoroutine(waitforchage(startPos, endPos));
+                return;
+            }
+            else
+            {
+                board[indexEnd].GetComponent<Pices>().changeType(piecesTypes);
+            }
+        }
+            updateGraphics();
+        if(!recived)
+            OnlineSend.Send(startPos, endPos,PiecesTypes.Pawn);
     }
 
+    public static IEnumerator waitforchage(Vector3 startPos, Vector3 endPos)
+    {
+        int indexEnd = ((int)endPos.y) * 8 + ((int)endPos.x);
+        yield return new WaitUntil(() => MeniuSchimbare.isMade);
+        yield return new WaitForSeconds(0.1f);
+        updateGraphics();
+        OnlineSend.Send(startPos, endPos, board[indexEnd].GetComponent<Pices>().data.type);
+    }
 
     public static int valoare(string nume)
     {
@@ -504,6 +534,8 @@ public class GameManager : MonoBehaviour
         int indexEnd = ((int)endPos.y) * 8 + ((int)endPos.x);
         int movement = indexEnd - indexStart;
 
+        print(indexEnd / 8);
+
         if (recived)
         {
             board[indexStart].gameObject.transform.position =
@@ -585,7 +617,11 @@ public class GameManager : MonoBehaviour
                     if (movement == 8)
                     {
                        
-
+                        if ((indexEnd / 8) == 7)
+                        {
+                            print("lAST lINE");
+                            return 10;
+                        }
                         return 1;
                     }
 
@@ -656,8 +692,13 @@ public class GameManager : MonoBehaviour
 
                     if (movement == -8)
                     {
-                        
 
+
+                        if ((indexEnd / 8) == 0)
+                        {
+                            print("First Line");
+                            return 10;
+                        }
                         return 1;
                     }
 

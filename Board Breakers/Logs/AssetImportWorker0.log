@@ -15,7 +15,7 @@ C:/Users/sumur/Desktop/An3/Licenta/Board Breakers
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-53603
+55355
 Successfully changed project path to: C:/Users/sumur/Desktop/An3/Licenta/Board Breakers
 C:/Users/sumur/Desktop/An3/Licenta/Board Breakers
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,16 +49,16 @@ C:/Users/sumur/Desktop/An3/Licenta/Board Breakers
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [20940]  Target information:
+Player connection [44592]  Target information:
 
-Player connection [20940]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1950802630 [EditorId] 1950802630 [Version] 1048832 [Id] WindowsEditor(7,sumithesum) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [44592]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 3649846181 [EditorId] 3649846181 [Version] 1048832 [Id] WindowsEditor(7,sumithesum) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [20940]  * "[IP] 192.168.100.26 [Port] 0 [Flags] 2 [Guid] 1950802630 [EditorId] 1950802630 [Version] 1048832 [Id] WindowsEditor(7,sumithesum) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [44592]  * "[IP] 192.168.100.26 [Port] 0 [Flags] 2 [Guid] 3649846181 [EditorId] 3649846181 [Version] 1048832 [Id] WindowsEditor(7,sumithesum) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [20940] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [20940] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [44592] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [44592] Host joined alternative multi-casting on [225.0.0.222:34997]...
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-Refreshing native plugins compatible for Editor in 29.38 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 33.89 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.49f1 (4dae1bb8668d)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Resources/UnitySubsystems
@@ -74,46 +74,46 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56148
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56692
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.006297 seconds.
-- Loaded All Assemblies, in  0.284 seconds
+Registered in 0.007788 seconds.
+- Loaded All Assemblies, in  0.285 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.201 seconds
-Domain Reload Profiling: 485ms
-	BeginReloadAssembly (95ms)
+- Finished resetting the current domain, in  0.203 seconds
+Domain Reload Profiling: 488ms
+	BeginReloadAssembly (100ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (23ms)
+	RebuildCommonClasses (25ms)
 	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (46ms)
-	LoadAllAssembliesAndSetupDomain (113ms)
-		LoadAssemblies (94ms)
+	initialDomainReloadingComplete (49ms)
+	LoadAllAssembliesAndSetupDomain (103ms)
+		LoadAssemblies (99ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (111ms)
-			TypeCache.Refresh (110ms)
-				TypeCache.ScanAssembly (100ms)
+		AnalyzeDomain (101ms)
+			TypeCache.Refresh (100ms)
+				TypeCache.ScanAssembly (90ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (202ms)
+	FinalizeReload (204ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (166ms)
+		SetupLoadedEditorAssemblies (164ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (8ms)
-			SetLoadedEditorAssemblies (5ms)
+			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (115ms)
-			ProcessInitializeOnLoadMethodAttributes (35ms)
+			ProcessInitializeOnLoadAttributes (113ms)
+			ProcessInitializeOnLoadMethodAttributes (36ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -124,7 +124,7 @@ Worker process is ready to serve import requests
 Caller must complete domain reload
 Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.612 seconds
+- Loaded All Assemblies, in  0.592 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
@@ -142,464 +142,48 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
 (Filename: Assets/FishNet/Runtime/Editor/Configuring/FIshNetGettingStartedEditor.cs Line: 172)
 
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.782 seconds
-Domain Reload Profiling: 1392ms
-	BeginReloadAssembly (111ms)
+- Finished resetting the current domain, in  0.585 seconds
+Domain Reload Profiling: 1174ms
+	BeginReloadAssembly (106ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (4ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (15ms)
 	RebuildCommonClasses (28ms)
-	RebuildNativeTypeToScriptingClass (8ms)
-	initialDomainReloadingComplete (52ms)
-	LoadAllAssembliesAndSetupDomain (410ms)
-		LoadAssemblies (305ms)
+	RebuildNativeTypeToScriptingClass (7ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (414ms)
+		LoadAssemblies (328ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (171ms)
-			TypeCache.Refresh (138ms)
-				TypeCache.ScanAssembly (126ms)
-			ScanForSourceGeneratedMonoScriptInfo (16ms)
-			ResolveRequiredComponents (14ms)
-	FinalizeReload (782ms)
+		AnalyzeDomain (149ms)
+			TypeCache.Refresh (126ms)
+				TypeCache.ScanAssembly (113ms)
+			ScanForSourceGeneratedMonoScriptInfo (14ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (585ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (661ms)
+		SetupLoadedEditorAssemblies (480ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (6ms)
 			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (50ms)
-			ProcessInitializeOnLoadAttributes (578ms)
-			ProcessInitializeOnLoadMethodAttributes (20ms)
+			BeforeProcessingInitializeOnLoad (48ms)
+			ProcessInitializeOnLoadAttributes (400ms)
+			ProcessInitializeOnLoadMethodAttributes (19ms)
 			AfterProcessingInitializeOnLoad (5ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
-Refreshing native plugins compatible for Editor in 17.74 ms, found 8 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 13.35 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4477 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 34 unused Assets / (59.4 KB). Loaded Objects now: 4949.
-Memory consumption went from 153.1 MB to 153.0 MB.
-Total: 4.704500 ms (FindLiveObjects: 0.267000 ms CreateObjectMapping: 0.226300 ms MarkObjects: 4.038600 ms  DeleteObjects: 0.171200 ms)
+Unloading 4478 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 34 unused Assets / (59.7 KB). Loaded Objects now: 4950.
+Memory consumption went from 153.0 MB to 153.0 MB.
+Total: 2.827100 ms (FindLiveObjects: 0.212200 ms CreateObjectMapping: 0.104600 ms MarkObjects: 2.420700 ms  DeleteObjects: 0.088800 ms)
 
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 39518.921054 seconds.
-  path: Assets/Assets/Resources/Prefab/Lobby.prefab
-  artifactKey: Guid(868a479d149965347b40ff80cb34d481) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/Resources/Prefab/Lobby.prefab using Guid(868a479d149965347b40ff80cb34d481) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '28aad617f1c9f18b4a721ceb22ff976a') in 0.085825 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 20
-========================================================================
-Received Prepare
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Caller must complete domain reload
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.400 seconds
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.870 seconds
-Domain Reload Profiling: 1268ms
-	BeginReloadAssembly (138ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (33ms)
-	RebuildCommonClasses (24ms)
-	RebuildNativeTypeToScriptingClass (8ms)
-	initialDomainReloadingComplete (26ms)
-	LoadAllAssembliesAndSetupDomain (202ms)
-		LoadAssemblies (260ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (12ms)
-			TypeCache.Refresh (5ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (7ms)
-	FinalizeReload (870ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (507ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (49ms)
-			ProcessInitializeOnLoadAttributes (421ms)
-			ProcessInitializeOnLoadMethodAttributes (20ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 21.45 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4455 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 30 unused Assets / (34.0 KB). Loaded Objects now: 4953.
-Memory consumption went from 148.7 MB to 148.6 MB.
-Total: 5.020900 ms (FindLiveObjects: 0.533700 ms CreateObjectMapping: 0.260400 ms MarkObjects: 4.152300 ms  DeleteObjects: 0.073000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Caller must complete domain reload
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.501 seconds
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.102 seconds
-Domain Reload Profiling: 1593ms
-	BeginReloadAssembly (130ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (25ms)
-	RebuildCommonClasses (30ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (51ms)
-	LoadAllAssembliesAndSetupDomain (271ms)
-		LoadAssemblies (326ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (18ms)
-			TypeCache.Refresh (6ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (1102ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (620ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (7ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (57ms)
-			ProcessInitializeOnLoadAttributes (527ms)
-			ProcessInitializeOnLoadMethodAttributes (21ms)
-			AfterProcessingInitializeOnLoad (6ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 18.55 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4456 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 29 unused Assets / (33.1 KB). Loaded Objects now: 4956.
-Memory consumption went from 148.9 MB to 148.9 MB.
-Total: 4.668700 ms (FindLiveObjects: 0.291400 ms CreateObjectMapping: 0.219700 ms MarkObjects: 4.054100 ms  DeleteObjects: 0.090800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Caller must complete domain reload
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.394 seconds
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.908 seconds
-Domain Reload Profiling: 1300ms
-	BeginReloadAssembly (123ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (26ms)
-	RebuildCommonClasses (26ms)
-	RebuildNativeTypeToScriptingClass (8ms)
-	initialDomainReloadingComplete (28ms)
-	LoadAllAssembliesAndSetupDomain (207ms)
-		LoadAssemblies (259ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (14ms)
-			TypeCache.Refresh (5ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (7ms)
-	FinalizeReload (908ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (479ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (53ms)
-			ProcessInitializeOnLoadAttributes (392ms)
-			ProcessInitializeOnLoadMethodAttributes (19ms)
-			AfterProcessingInitializeOnLoad (6ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 19.01 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4456 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 29 unused Assets / (34.2 KB). Loaded Objects now: 4959.
-Memory consumption went from 148.9 MB to 148.9 MB.
-Total: 4.574000 ms (FindLiveObjects: 0.299800 ms CreateObjectMapping: 0.238800 ms MarkObjects: 3.967100 ms  DeleteObjects: 0.066900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Caller must complete domain reload
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.401 seconds
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.865 seconds
-Domain Reload Profiling: 1264ms
-	BeginReloadAssembly (124ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (26ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (28ms)
-	LoadAllAssembliesAndSetupDomain (212ms)
-		LoadAssemblies (265ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (15ms)
-			TypeCache.Refresh (5ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (7ms)
-	FinalizeReload (865ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (468ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (52ms)
-			ProcessInitializeOnLoadAttributes (380ms)
-			ProcessInitializeOnLoadMethodAttributes (19ms)
-			AfterProcessingInitializeOnLoad (8ms)
-			EditorAssembliesLoaded (1ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 20.70 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4456 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 29 unused Assets / (33.2 KB). Loaded Objects now: 4962.
-Memory consumption went from 148.9 MB to 148.9 MB.
-Total: 4.471400 ms (FindLiveObjects: 0.312400 ms CreateObjectMapping: 0.245900 ms MarkObjects: 3.844500 ms  DeleteObjects: 0.067300 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Caller must complete domain reload
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.418 seconds
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Script 'Packages/com.rlabrecque.steamworks.net/Runtime/types/SteamTimeline/TimelineEventHandle_t.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.890 seconds
-Domain Reload Profiling: 1305ms
-	BeginReloadAssembly (124ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (25ms)
-	RebuildCommonClasses (27ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (33ms)
-	LoadAllAssembliesAndSetupDomain (220ms)
-		LoadAssemblies (273ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (14ms)
-			TypeCache.Refresh (5ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (7ms)
-	FinalizeReload (890ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (482ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (55ms)
-			ProcessInitializeOnLoadAttributes (391ms)
-			ProcessInitializeOnLoadMethodAttributes (21ms)
-			AfterProcessingInitializeOnLoad (6ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 23.06 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4456 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 29 unused Assets / (33.2 KB). Loaded Objects now: 4965.
-Memory consumption went from 148.9 MB to 148.8 MB.
-Total: 6.620100 ms (FindLiveObjects: 1.540600 ms CreateObjectMapping: 0.643200 ms MarkObjects: 4.294300 ms  DeleteObjects: 0.138300 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 21.84 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 1 unused Assets / (3.1 KB). Loaded Objects now: 4965.
-Memory consumption went from 79.5 MB to 79.5 MB.
-Total: 5.108800 ms (FindLiveObjects: 0.386900 ms CreateObjectMapping: 0.223400 ms MarkObjects: 4.466500 ms  DeleteObjects: 0.030500 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 20.90 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 1 unused Assets / (3.1 KB). Loaded Objects now: 4965.
-Memory consumption went from 79.1 MB to 79.1 MB.
-Total: 4.453600 ms (FindLiveObjects: 0.304600 ms CreateObjectMapping: 0.234100 ms MarkObjects: 3.878800 ms  DeleteObjects: 0.034800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 21.64 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 1 unused Assets / (3.1 KB). Loaded Objects now: 4965.
-Memory consumption went from 79.1 MB to 79.1 MB.
-Total: 4.780700 ms (FindLiveObjects: 0.287300 ms CreateObjectMapping: 0.278700 ms MarkObjects: 4.170000 ms  DeleteObjects: 0.043400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 

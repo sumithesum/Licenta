@@ -27,27 +27,27 @@ public class OnlineSend : NetworkBehaviour
         }
     }
 
-    public static void Send(Vector3 start, Vector3 end)
+    public static void Send(Vector3 start, Vector3 end , PiecesTypes piecesTypes)
     {
-        Local.SendMoveFromLocal(start, end);
+        Local.SendMoveFromLocal(start, end,  piecesTypes);
     }
 
-    public void SendMoveFromLocal(Vector3 start, Vector3 end)
+    public void SendMoveFromLocal(Vector3 start, Vector3 end, PiecesTypes piecesTypes)
     {
-        SendMoveToServer(start, end);
+        SendMoveToServer(start, end,  piecesTypes);
     }
 
     [ServerRpc]
-    private void SendMoveToServer(Vector3 startPos, Vector3 endPos)
+    private void SendMoveToServer(Vector3 startPos, Vector3 endPos, PiecesTypes N)
     {
         Debug.Log($"[Server] Received move: {startPos} -> {endPos}");
 
         changeT();
-        SendMoveToOtherClient(startPos, endPos);
+        SendMoveToOtherClient(startPos, endPos,N);
     }
 
     [ObserversRpc(ExcludeOwner = true)]
-    private void SendMoveToOtherClient(Vector3 startPos, Vector3 endPos)
+    private void SendMoveToOtherClient(Vector3 startPos, Vector3 endPos, PiecesTypes piecesTypes)
     {
 
        
@@ -55,7 +55,7 @@ public class OnlineSend : NetworkBehaviour
         print("is White Turn ?  : " +isWhiteStatic);
         int miscare = Movement(startPos, endPos, true);
         print(miscare);
-        ActualMovement(startPos, endPos, miscare);
+        ActualMovement(startPos, endPos, miscare,true, piecesTypes);
    
         if (miscare == 2)
             {

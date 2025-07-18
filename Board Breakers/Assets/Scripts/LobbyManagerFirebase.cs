@@ -25,6 +25,7 @@ public class LobbyManagerFirebase : MonoBehaviour
     {
         db = FirebaseDatabase.DefaultInstance.RootReference;
         PlayerHost.username = SteamFriends.GetPersonaName();
+        print(db.ToString());
         //createLobby(PlayerHost.username + "2", "2");
         //getLobys();
     }
@@ -54,6 +55,7 @@ public class LobbyManagerFirebase : MonoBehaviour
         lobbyRef.SetRawJsonValueAsync(json);
         PlayerHost.isPublic = true;
         PlayerHost.lobbyFirebaseKey = lobbyRef.Key;
+        print("Lobby sent");
 
     }
     public static void LeaveLobby()

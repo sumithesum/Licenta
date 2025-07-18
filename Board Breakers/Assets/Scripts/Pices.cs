@@ -81,8 +81,8 @@ public class Pices : NetworkBehaviour
                 else
                 {
 
-                    OnlineSend.Send(initialPos, this.transform.position);
-                    ActualMovement(initialPos, this.transform.position, movement);
+                    //OnlineSend.Send(initialPos, this.transform.position);
+                    ActualMovement(initialPos, this.transform.position, movement,false,PiecesTypes.Knight);
                   
 
                     
@@ -103,6 +103,14 @@ public class Pices : NetworkBehaviour
            
     }
 
+    public void changeType(PiecesTypes type)
+    {
+        data.type = type;
+        this.GetComponent<Renderer>().material = this.getArtPiece();
+        this.name = data.type.ToString() + (data.isWhite ? "White" : "Black") + "(Clone)";
+        print("New Name : " + this.name);
+        MeniuSchimbare.isMade = true;
+    }
 
 
     private Vector3 GetMouseWorldPosition()
